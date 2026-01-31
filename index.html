@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <meta name="description"
     content="ELSA: Acoustic Event-Level Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation" />
   <title>ELSA: Acoustic Event-Level Semantic Alignment</title>
@@ -19,7 +22,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=1.0" />
 </head>
 
 <body>
@@ -328,7 +331,10 @@
     <section id="citation" class="section fade-in">
       <h2>Citation</h2>
       <div class="card" style="background: transparent; border: none; box-shadow: none; padding: 0;">
-        <pre><code>@inproceedings{elsa2026,
+        <button class="copy-btn" onclick="copyCitation()">
+          <i class="fas fa-copy"></i> Copy
+        </button>
+        <pre><code id="citation-code">@inproceedings{elsa2026,
   title={ELSA: Acoustic Event-Level Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation},
   author={Author One and Author Two and Author Three},
   booktitle={Interspeech 2026},
@@ -782,6 +788,27 @@
         lightbox.classList.add('active');
       }, 10);
       lightboxImg.src = 'statics/images/model.png';
+    };
+
+    // --- Copy Citation Logic ---
+    window.copyCitation = function () {
+      const citationText = document.getElementById('citation-code').innerText;
+      const btn = document.querySelector('.copy-btn');
+
+      navigator.clipboard.writeText(citationText).then(() => {
+        const originalContent = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.style.borderColor = '#4ade80'; // Green success color
+        btn.style.color = '#4ade80';
+
+        setTimeout(() => {
+          btn.innerHTML = originalContent;
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
     };
 
     // --- SVG Connector Logic ---
