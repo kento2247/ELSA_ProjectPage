@@ -1,6 +1,6 @@
 project pageを作成したい
 タイトルは
-ELSA: Acoustic Event-Wise Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation
+ELSA: Acoustic Event-Level Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation
 論文の内容は
 Paper_Instructions_and_Template_for_Interspeech_2026.pdf
 
@@ -17,3 +17,9 @@ github pagesで公開したい
 - ディズニーの「エルサ」を彷彿とさせるデザインテーマ（色使い、雰囲気）にする
 - 降った雪がページ下部に積もるようにする
 - タイトルの先頭に雪だるまのアイコンを追加する
+- Methodセクションは `model.png` を使用して説明する（アイコンパイプラインはDemoで使用する）
+- DemoセクションをJSON駆動のインタラクティブな形式にする
+  - ユーザーがサンプルを選択できる
+  - 選択されたサンプルに基づいて、パイプライン（Text -> LLM -> Parsed / Audio -> LASS -> Separated -> Score）の内容が動的に変化する
+- Analysisセクションもカルーセルにする
+- カルーセルは7秒ごとに自動で切り替わるようにする

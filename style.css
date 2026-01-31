@@ -515,3 +515,334 @@ pre {
   pointer-events: none;
   z-index: -1;
 }
+
+/* New Pipeline Visual Styles */
+.pipeline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  overflow-x: auto;
+}
+
+.pipeline-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.process-node {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 140px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  position: relative;
+}
+
+.process-node:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(103, 232, 249, 0.3);
+  border-color: var(--primary-color);
+}
+
+.node-icon {
+  font-size: 2rem;
+  color: var(--primary-color);
+  text-shadow: 0 0 15px var(--primary-color);
+}
+
+/* Image Wrappers for LLM/LASS icons */
+.node-img-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  padding: 5px;
+  box-shadow: 0 0 20px rgba(103, 232, 249, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.node-img-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.node-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.arrow-right {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+}
+
+/* Convergence Arrows */
+.pipeline-convergence {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.convergence-arrow {
+  font-size: 2rem;
+  color: var(--secondary-color);
+  text-shadow: 0 0 10px var(--secondary-color);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-10px);
+  }
+
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Final Model Node */
+.final-model {
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(11, 17, 32, 0.8));
+  border: 1px solid var(--primary-color);
+  min-width: 300px;
+}
+
+.main-icon {
+  font-size: 3rem;
+  color: #fff;
+}
+
+.node-inputs {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.score-badge.large {
+  font-size: 1.5rem;
+  padding: 1rem 3rem;
+  min-width: 200px;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .pipeline-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .arrow-right {
+    transform: rotate(90deg);
+  }
+
+  .pipeline-container {
+    padding: 1rem 0;
+  }
+}
+
+/* Interactive Demo Styles */
+.demo-selector-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.glass-select {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--primary-color);
+  color: var(--text-primary);
+  padding: 0.8rem 2rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  cursor: pointer;
+  outline: none;
+  backdrop-filter: blur(10px);
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--primary-color) 50%),
+    linear-gradient(135deg, var(--primary-color) 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px);
+  background-size: 5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+  min-width: 250px;
+  box-shadow: 0 0 15px rgba(103, 232, 249, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-select:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 25px rgba(103, 232, 249, 0.4);
+}
+
+.node-content {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  max-width: 200px;
+  word-wrap: break-word;
+  transition: all 0.3s ease;
+}
+
+.code-box {
+  font-family: var(--font-mono);
+  color: #a5b4fc;
+}
+
+.text-box {
+  font-style: italic;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(103, 232, 249, 0.7);
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px 10px rgba(103, 232, 249, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(103, 232, 249, 0);
+  }
+}
+
+.pulse-anim {
+  animation: pulse 0.5s ease-out;
+  border-color: var(--primary-color);
+  background: rgba(103, 232, 249, 0.1);
+}
+
+/* Audio Player & Waveform */
+.audio-player-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.audio-player-wrapper audio {
+  width: 180px;
+  height: 35px;
+  margin-top: 0.5rem;
+}
+
+.waveform-visualizer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.wave-bar {
+  width: 4px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+  height: 100%;
+  transform: scaleY(0.2);
+  transform-origin: bottom;
+  transition: transform 0.1s;
+}
+
+/* Animations for Bars */
+@keyframes waveAnimation {
+
+  0%,
+  100% {
+    transform: scaleY(0.2);
+  }
+
+  50% {
+    transform: scaleY(1.0);
+  }
+}
+
+.waveform-visualizer.playing .wave-bar {
+  animation: waveAnimation 0.5s infinite ease-in-out;
+}
+
+/* Stagger animations */
+.wave-bar:nth-child(1) {
+  animation-delay: 0.0s;
+  height: 40%;
+}
+
+.wave-bar:nth-child(2) {
+  animation-delay: 0.1s;
+  height: 60%;
+}
+
+.wave-bar:nth-child(3) {
+  animation-delay: 0.2s;
+  height: 100%;
+}
+
+.wave-bar:nth-child(4) {
+  animation-delay: 0.3s;
+  height: 50%;
+}
+
+.wave-bar:nth-child(5) {
+  animation-delay: 0.1s;
+  height: 80%;
+}
+
+.wave-bar:nth-child(6) {
+  animation-delay: 0.2s;
+  height: 40%;
+}
+
+.wave-bar:nth-child(7) {
+  animation-delay: 0.4s;
+  height: 70%;
+}
+
+.wave-bar:nth-child(8) {
+  animation-delay: 0.2s;
+  height: 60%;
+}
+
+.wave-bar:nth-child(9) {
+  animation-delay: 0.0s;
+  height: 30%;
+}
