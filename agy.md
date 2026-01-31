@@ -21,5 +21,6 @@ github pagesで公開したい
 - DemoセクションをJSON駆動のインタラクティブな形式にする
   - ユーザーがサンプルを選択できる
   - 選択されたサンプルに基づいて、パイプライン（Text -> LLM -> Parsed / Audio -> LASS -> Separated -> Score）の内容が動的に変化する
+  - データは `demo.json` で管理する
 - Analysisセクションもカルーセルにする
 - カルーセルは7秒ごとに自動で切り替わるようにする

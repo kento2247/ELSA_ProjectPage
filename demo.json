@@ -1,0 +1,32 @@
+[
+  {
+    "id": "dog",
+    "label": "Dog Barking",
+    "text": "\"A large dog barking aggressively.\"",
+    "parsed": "[\"dog\", \"barking\", \"aggressively\"]",
+    "audioGen": "#",
+    "audioSep": "#",
+    "score": "0.85",
+    "humanScore": "0.90"
+  },
+  {
+    "id": "crowd",
+    "label": "Crowd Cheering",
+    "text": "\"People clapping and cheering in a stadium.\"",
+    "parsed": "[\"people\", \"clapping\", \"cheering\"]",
+    "audioGen": "#",
+    "audioSep": "#",
+    "score": "0.92",
+    "humanScore": "0.95"
+  },
+  {
+    "id": "rain",
+    "label": "Rain on Roof",
+    "text": "\"Heavy rain falling on a tin roof.\"",
+    "parsed": "[\"rain\", \"falling\", \"tin roof\"]",
+    "audioGen": "#",
+    "audioSep": "#",
+    "score": "0.88",
+    "humanScore": "0.89"
+  }
+]

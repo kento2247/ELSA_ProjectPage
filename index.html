@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="ELSA: Acoustic Event-Wise Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation" />
-  <title>ELSA: Acoustic Event-Wise Semantic Alignment</title>
+    content="ELSA: Acoustic Event-Level Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation" />
+  <title>ELSA: Acoustic Event-Level Semantic Alignment</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,7 +34,10 @@
   <header class="hero">
     <div class="container fade-in">
       <h1 class="title">
-        <i class="fas fa-snowman"></i> ELSA: Acoustic Event-Level Semantic Alignment for Fine-Grained Reference-Free
+        <i class="fas fa-snowman"></i> <span class="highlight-char">ELSA</span>: Acoustic <span
+          class="highlight-char">E</span>vent-<span class="highlight-char">L</span>evel <span
+          class="highlight-char">S</span>emantic <span class="highlight-char">A</span>lignment for Fine-Grained
+        Reference-Free
         Text-to-Audio Evaluation
       </h1>
 
@@ -50,8 +53,8 @@
       </div>
 
       <div class="action-buttons fade-in delay-3">
-        <a href="#" class="btn"><i class="fas fa-file-pdf"></i> Paper</a>
-        <a href="#" class="btn"><i class="fab fa-github"></i> Code</a>
+        <a href="#" class="btn" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> Paper</a>
+        <a href="#" class="btn" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
         <a href="#demo" class="btn"><i class="fas fa-play"></i> Demo</a>
       </div>
     </div>
@@ -225,163 +228,112 @@
         </div>
 
         <!-- Score -->
-        <div class="pipeline-row centered">
-          <!-- Audio Samples / Pipeline Demo -->
-          <section id="demo" class="section fade-in">
-            <h2>Demo Pipeline</h2>
-            <p class="text-content" style="margin-bottom: 2rem;">
-              Visualize the ELSA evaluation pipeline: from text prompt to audio generation to score calculation.
-            </p>
+        <!-- Scores -->
+        <!-- Scores -->
+        <div class="pipeline-row centered" style="flex-direction: column; gap: 0.5rem;">
+          <div class="score-label">ELSA Score</div>
+          <div class="score-badge large" id="demo-score" style="margin-top: 0;">0.00</div>
 
-            <!-- Pipeline Item 1 -->
-            <div class="pipeline-item">
-              <div class="pipeline-step">
-                <span class="step-label"><i class="fas fa-keyboard"></i> Text Prompt</span>
-                <div
-                  style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 0.5rem; font-style: italic;">
-                  "A large dog barking aggressively."
-                </div>
-              </div>
+          <div class="human-ref-container" id="demo-human-score">
+            <i class="fas fa-user" style="margin-right: 5px;"></i> Human Score: <span>0.00</span>
+          </div>
+        </div>
 
-              <div class="pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+    </section>
 
-              <div class="pipeline-step">
-                <span class="step-label"><i class="fas fa-wave-square"></i> Generated Audio</span>
-                <audio controls style="width: 100%;">
-                  <source src="#" type="audio/wav" />
-                </audio>
-              </div>
+    <!-- Experimental Results (Carousel) -->
+    <section id="results" class="section fade-in">
+      <h2>Experimental Results</h2>
+      <p class="text-content" style="margin-bottom: 2rem;">
+        Swipe to see our comparison with state-of-the-art metrics and ablation studies.
+      </p>
 
-              <div class="pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="carousel-container" id="results-carousel">
+        <button class="carousel-btn carousel-prev"><i class="fas fa-chevron-left"></i></button>
 
-              <div class="pipeline-step" style="align-items: center; min-width: 100px;">
-                <span class="step-label"><i class="fas fa-chart-line"></i> ELSA Score</span>
-                <div class="score-badge">0.85</div>
-                <span style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">Baseline: 0.60</span>
-              </div>
+        <div class="carousel-track">
+          <!-- Slide 1 -->
+          <div class="carousel-slide">
+            <h3>Main Comparative Results</h3>
+            <div class="image-container" style="border: none; background: transparent;">
+              <img src="statics/images/table1.png" alt="Table 1" class="responsive-img" />
             </div>
+            <p class="caption">Table 1: Comparison with SOTA metrics.</p>
+          </div>
 
-            <!-- Pipeline Item 2 -->
-            <div class="pipeline-item">
-              <div class="pipeline-step">
-                <span class="step-label"><i class="fas fa-keyboard"></i> Text Prompt</span>
-                <div
-                  style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 0.5rem; font-style: italic;">
-                  "People clapping and cheering in a stadium."
-                </div>
-              </div>
-
-              <div class="pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
-
-              <div class="pipeline-step">
-                <span class="step-label"><i class="fas fa-wave-square"></i> Generated Audio</span>
-                <audio controls style="width: 100%;">
-                  <source src="#" type="audio/wav" />
-                </audio>
-              </div>
-
-              <div class="pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
-
-              <div class="pipeline-step" style="align-items: center; min-width: 100px;">
-                <span class="step-label"><i class="fas fa-chart-line"></i> ELSA Score</span>
-                <div class="score-badge">0.92</div>
-                <span style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">Baseline: 0.75</span>
-              </div>
+          <!-- Slide 2 -->
+          <div class="carousel-slide">
+            <h3>Ablation Studies</h3>
+            <div class="image-container" style="border: none; background: transparent;">
+              <img src="statics/images/table2.png" alt="Table 2" class="responsive-img" />
             </div>
-          </section>
+            <p class="caption">Table 2: Ablation analysis.</p>
+          </div>
 
-          <!-- Experimental Results (Carousel) -->
-          <section id="results" class="section fade-in">
-            <h2>Experimental Results</h2>
-            <p class="text-content" style="margin-bottom: 2rem;">
-              Swipe to see our comparison with state-of-the-art metrics and ablation studies.
-            </p>
-
-            <div class="carousel-container" id="results-carousel">
-              <button class="carousel-btn carousel-prev"><i class="fas fa-chevron-left"></i></button>
-
-              <div class="carousel-track">
-                <!-- Slide 1 -->
-                <div class="carousel-slide">
-                  <h3>Main Comparative Results</h3>
-                  <div class="image-container" style="border: none; background: transparent;">
-                    <img src="statics/images/table1.png" alt="Table 1" class="responsive-img" />
-                  </div>
-                  <p class="caption">Table 1: Comparison with SOTA metrics.</p>
-                </div>
-
-                <!-- Slide 2 -->
-                <div class="carousel-slide">
-                  <h3>Ablation Studies</h3>
-                  <div class="image-container" style="border: none; background: transparent;">
-                    <img src="statics/images/table2.png" alt="Table 2" class="responsive-img" />
-                  </div>
-                  <p class="caption">Table 2: Ablation analysis.</p>
-                </div>
-
-                <!-- Slide 3 -->
-                <div class="carousel-slide">
-                  <h3>Additional Metrics</h3>
-                  <div class="image-container" style="border: none; background: transparent;">
-                    <img src="statics/images/table3.png" alt="Table 3" class="responsive-img" />
-                  </div>
-                  <p class="caption">Table 3: Extended evaluation.</p>
-                </div>
-              </div>
-
-              <button class="carousel-btn carousel-next"><i class="fas fa-chevron-right"></i></button>
-
-              <div class="carousel-dots"></div>
+          <!-- Slide 3 -->
+          <div class="carousel-slide">
+            <h3>Additional Metrics</h3>
+            <div class="image-container" style="border: none; background: transparent;">
+              <img src="statics/images/table3.png" alt="Table 3" class="responsive-img" />
             </div>
-          </section>
+            <p class="caption">Table 3: Extended evaluation.</p>
+          </div>
+        </div>
 
-          <!-- Analysis -->
-          <section id="analysis" class="section fade-in">
-            <h2>Analysis</h2>
-            <p class="text-content" style="margin-bottom: 2rem;">
-              Detailed analysis of event sensitivity compared to previous approaches.
-            </p>
-            <div class="carousel-container" id="analysis-carousel">
-              <button class="carousel-btn carousel-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-btn carousel-next"><i class="fas fa-chevron-right"></i></button>
 
-              <div class="carousel-track">
-                <!-- Slide 1 -->
-                <div class="carousel-slide">
-                  <h3>ELSA Event Sensitivity</h3>
-                  <div class="image-container" style="border: none; background: transparent;">
-                    <img src="statics/images/event_sens.png" alt="Event Sensitivity" class="responsive-img" />
-                  </div>
-                  <p class="caption"><strong>ELSA</strong> accurately captures fine-grained events.</p>
-                </div>
+        <div class="carousel-dots"></div>
+      </div>
+    </section>
 
-                <!-- Slide 2 -->
-                <div class="carousel-slide">
-                  <h3>Previous Approaches</h3>
-                  <div class="image-container" style="border: none; background: transparent;">
-                    <img src="statics/images/event_sens_prev.png" alt="Previous Approaches" class="responsive-img" />
-                  </div>
-                  <p class="caption">Existing metrics struggle with temporal event alignment.</p>
-                </div>
-              </div>
+    <!-- Analysis -->
+    <section id="analysis" class="section fade-in">
+      <h2>Analysis</h2>
+      <p class="text-content" style="margin-bottom: 2rem;">
+        Detailed analysis of event sensitivity compared to previous approaches.
+      </p>
+      <div class="carousel-container" id="analysis-carousel">
+        <button class="carousel-btn carousel-prev"><i class="fas fa-chevron-left"></i></button>
 
-              <button class="carousel-btn carousel-next"><i class="fas fa-chevron-right"></i></button>
-
-              <div class="carousel-dots"></div>
+        <div class="carousel-track">
+          <!-- Slide 1 -->
+          <div class="carousel-slide">
+            <h3>ELSA Event Sensitivity</h3>
+            <div class="image-container" style="border: none; background: transparent;">
+              <img src="statics/images/event_sens.png" alt="Event Sensitivity" class="responsive-img" />
             </div>
-          </section>
+            <p class="caption"><strong>ELSA</strong> accurately captures fine-grained events.</p>
+          </div>
 
-          <!-- Citation -->
-          <section id="citation" class="section fade-in">
-            <h2>Citation</h2>
-            <div class="card" style="background: transparent; border: none; box-shadow: none; padding: 0;">
-              <pre><code>@inproceedings{elsa2026,
-  title={ELSA: Acoustic Event-Wise Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation},
+          <!-- Slide 2 -->
+          <div class="carousel-slide">
+            <h3>Previous Approaches</h3>
+            <div class="image-container" style="border: none; background: transparent;">
+              <img src="statics/images/event_sens_prev.png" alt="Previous Approaches" class="responsive-img" />
+            </div>
+            <p class="caption">Existing metrics struggle with temporal event alignment.</p>
+          </div>
+        </div>
+
+        <button class="carousel-btn carousel-next"><i class="fas fa-chevron-right"></i></button>
+
+        <div class="carousel-dots"></div>
+      </div>
+    </section>
+
+    <!-- Citation -->
+    <section id="citation" class="section fade-in">
+      <h2>Citation</h2>
+      <div class="card" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+        <pre><code>@inproceedings{elsa2026,
+  title={ELSA: Acoustic Event-Level Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation},
   author={Author One and Author Two and Author Three},
   booktitle={Interspeech 2026},
   year={2026}
 }</code></pre>
-            </div>
-          </section>
+      </div>
+    </section>
 
   </main>
 
@@ -529,35 +481,7 @@
       });
 
       // --- Interactive Demo Logic ---
-      const demoData = [
-        {
-          id: 'dog',
-          label: 'Dog Barking',
-          text: '"A large dog barking aggressively."',
-          parsed: '["dog", "barking", "aggressively"]',
-          audioGen: '#', // Replace with real path
-          audioSep: '#', // Replace with real path
-          score: '0.85'
-        },
-        {
-          id: 'crowd',
-          label: 'Crowd Cheering',
-          text: '"People clapping and cheering in a stadium."',
-          parsed: '["people", "clapping", "cheering"]',
-          audioGen: '#',
-          audioSep: '#',
-          score: '0.92'
-        },
-        {
-          id: 'rain',
-          label: 'Rain on Roof',
-          text: '"Heavy rain falling on a tin roof."',
-          parsed: '["rain", "falling", "tin roof"]',
-          audioGen: '#',
-          audioSep: '#',
-          score: '0.88'
-        }
-      ];
+      let demoData = []; // Will be populated from JSON
 
       const select = document.getElementById('sample-select');
       const demoText = document.getElementById('demo-text');
@@ -565,14 +489,7 @@
       const demoAudioGen = document.getElementById('demo-audio-gen');
       const demoAudioSep = document.getElementById('demo-audio-sep');
       const demoScore = document.getElementById('demo-score');
-
-      // Populate Select
-      demoData.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item.id;
-        option.textContent = item.label;
-        select.appendChild(option);
-      });
+      const demoHumanScore = document.getElementById('demo-human-score').querySelector('span');
 
       // Update Function
       function updateDemo(id) {
@@ -580,30 +497,65 @@
         if (!data) return;
 
         // Animate changes
-        const elements = [demoText, demoParsed, demoScore];
+        const elements = [demoText, demoParsed, demoScore, document.getElementById('demo-human-score')];
         elements.forEach(el => el.classList.add('pulse-anim'));
         setTimeout(() => elements.forEach(el => el.classList.remove('pulse-anim')), 500);
 
         demoText.textContent = data.text;
         demoParsed.textContent = data.parsed;
         demoScore.textContent = data.score;
+        demoHumanScore.textContent = data.humanScore;
 
         // Update audio sources
         demoAudioGen.src = data.audioGen;
         demoAudioSep.src = data.audioSep;
       }
 
-      // Init logic wrapped in function to ensure elements exist
-      function initDemo() {
-        if (demoData.length > 0) {
-          updateDemo(demoData[0].id);
+      // Populate Select
+      function populateSelector() {
+        select.innerHTML = ''; // Clear loading/existing
+
+        if (demoData.length === 0) {
+          const option = document.createElement('option');
+          option.text = "No data available";
+          select.add(option);
+          return;
+        }
+
+        demoData.forEach(item => {
+          const option = document.createElement('option');
+          option.value = item.id;
+          option.textContent = item.label;
+          select.appendChild(option);
+        });
+      }
+
+      // Init Load
+      async function initDemo() {
+        try {
+          // Add loading state
+          select.innerHTML = '<option>Loading...</option>';
+
+          const response = await fetch('demo.json');
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          demoData = await response.json();
+
+          populateSelector();
+
+          if (demoData.length > 0) {
+            updateDemo(demoData[0].id);
+          }
+        } catch (e) {
+          console.error('Demo Init Error:', e);
+          select.innerHTML = '<option>Load Failed (Use Local Server)</option>';
+          demoText.textContent = "Error loading demo data. This feature requires a web server (e.g., Live Server) due to CORS policies.";
         }
       }
 
       // Listeners
       select.addEventListener('change', (e) => updateDemo(e.target.value));
 
-      // Initialize immediately
+      // Initialize
       initDemo();
 
       // Audio Visualizer Animation Toggle

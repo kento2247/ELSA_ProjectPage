@@ -81,6 +81,14 @@ h1 i {
   /* Slightly smaller to align better visually */
 }
 
+.highlight-char {
+  color: var(--secondary-color);
+  -webkit-text-fill-color: var(--secondary-color);
+  /* Override gradient text fill */
+  text-shadow: 0 0 15px var(--secondary-color);
+  font-weight: 800;
+}
+
 h2 {
   font-size: 2rem;
   margin-bottom: var(--spacing-md);
@@ -543,7 +551,9 @@ pre {
   flex-direction: column;
   align-items: center;
   gap: 0.8rem;
-  min-width: 140px;
+  min-width: 220px;
+  /* Increased width */
+  max-width: 300px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
   position: relative;
@@ -646,11 +656,34 @@ pre {
   font-style: italic;
 }
 
+/* Score Section Updates */
+/* Score Section Updates */
+.human-ref-container {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1rem;
+  border-radius: 99px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.human-ref-container span {
+  font-weight: 600;
+  color: #fff;
+  margin-left: 0.3rem;
+}
+
 .score-badge.large {
   font-size: 1.5rem;
   padding: 1rem 3rem;
   min-width: 200px;
-  margin-top: 1rem;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {
@@ -760,7 +793,8 @@ pre {
 }
 
 .audio-player-wrapper audio {
-  width: 180px;
+  width: 100%;
+  max-width: 200px;
   height: 35px;
   margin-top: 0.5rem;
 }
