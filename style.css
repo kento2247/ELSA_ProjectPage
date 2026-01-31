@@ -636,6 +636,37 @@ pre {
   }
 }
 
+/* Clickable Node (Popup) */
+.clickable-node {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clickable-node:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(103, 232, 249, 0.4);
+  border-color: #fff;
+}
+
+/* Phantom Input Visual Logic */
+.phantom-input-label {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: var(--secondary-color);
+  white-space: nowrap;
+  border: 1px dashed var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 /* Final Model Node */
 .final-model {
   background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(11, 17, 32, 0.8));
@@ -687,17 +718,56 @@ pre {
 }
 
 @media (max-width: 768px) {
+  .pipeline-container {
+    padding: 1rem 0;
+    /* Removed overflow from here */
+  }
+
+  /* Only the top area scrolls */
+  .pipeline-scroll-area {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    /* Ensure SVG scrolls with content - container must be relative */
+    position: relative;
+  }
+
   .pipeline-row {
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: row;
+    /* Keep horizontal */
+    flex-wrap: nowrap;
+    /* No wrapping */
+    justify-content: flex-start;
+    /* Align left */
+    gap: 1.5rem;
+    min-width: max-content;
+    /* Ensure row takes full width */
+    padding-bottom: 0;
+    /* padding handled by scroll area */
+  }
+
+  /* Override for centered rows (ELSA Model, Scores) */
+  .pipeline-row.centered {
+    justify-content: center;
+    width: 100%;
+    /* Ensure it spans width to center properly */
+    min-width: unset;
+    /* Remove max-content constraint */
+  }
+
+  .process-node {
+    min-width: 200px;
+    /* Fixed width to prevent squashing */
   }
 
   .arrow-right {
-    transform: rotate(90deg);
-  }
-
-  .pipeline-container {
-    padding: 1rem 0;
+    transform: none;
+    /* Reset rotation */
+    min-width: 20px;
+    display: flex;
+    justify-content: center;
   }
 }
 
@@ -835,10 +905,88 @@ pre {
   animation: waveAnimation 0.5s infinite ease-in-out;
 }
 
-/* Stagger animations */
-.wave-bar:nth-child(1) {
-  animation-delay: 0.0s;
-  height: 40%;
+/* Multi Audio List */
+.multi-audio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.mini-player-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.mini-player-row:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--secondary-color);
+}
+
+.mini-label {
+  font-size: 0.7rem;
+  color: #fff;
+  background: var(--secondary-color);
+  padding: 1px 4px;
+  border-radius: 3px;
+  min-width: 40px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-play-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-play-btn:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* Waveform Visualizer - specific for mini (or reuse) */
+.mini-waveform {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 15px;
+  flex-grow: 1;
+}
+
+.mini-wave-bar {
+  width: 2px;
+  background-color: var(--text-secondary);
+  height: 100%;
+  border-radius: 1px;
+  animation: none;
+}
+
+.mini-player-row.playing .mini-wave-bar {
+  background-color: var(--primary-color);
+  animation: waveAnimation 0.5s infinite ease-in-out;
+}
+
+/* Helper Class for Hidden Audio elements */
+.hidden-audio {
+  display: none;
 }
 
 .wave-bar:nth-child(2) {

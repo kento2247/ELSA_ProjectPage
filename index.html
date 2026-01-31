@@ -124,91 +124,92 @@
       </div>
 
       <div class="pipeline-container" id="demo-pipeline">
-        <!-- Branch 1: Text -->
-        <div class="pipeline-row">
-          <!-- Text Input -->
-          <div class="process-node">
-            <div class="node-icon"><i class="fas fa-file-alt"></i></div>
-            <div class="node-label">Text Prompt</div>
-            <div class="node-content text-box" id="demo-text">...</div>
-          </div>
-
-          <div class="arrow-right"><i class="fas fa-arrow-right"></i></div>
-
-          <!-- LLM -->
-          <div class="process-node highlight">
-            <div class="node-img-wrapper">
-              <img src="statics/images/openai.png" alt="OpenAI LLM" />
+        <!-- Scrollable Top Area -->
+        <div class="pipeline-scroll-area" style="position: relative;">
+          <!-- SVG Layer -->
+          <svg id="pipeline-svg"
+            style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 0;"></svg>
+          <!-- Branch 1: Text -->
+          <div class="pipeline-row">
+            <!-- Text Input -->
+            <div class="process-node">
+              <div class="node-icon"><i class="fas fa-file-alt"></i></div>
+              <div class="node-label">Text Prompt</div>
+              <div class="node-content text-box" id="demo-text">...</div>
             </div>
-            <div class="node-label">LLM Parsing</div>
-          </div>
 
-          <div class="arrow-right"><i class="fas fa-arrow-right"></i></div>
+            <div class="arrow-right"><i class="fas fa-arrow-right"></i></div>
 
-          <!-- Parsed Output -->
-          <div class="process-node">
-            <div class="node-icon"><i class="fas fa-list-ul"></i></div>
-            <div class="node-label">Parsed Text</div>
-            <div class="node-content code-box" id="demo-parsed">...</div>
-          </div>
-        </div>
-
-        <!-- Branch 2: Audio -->
-        <div class="pipeline-row" style="margin-top: 2rem;">
-          <!-- Generated Audio -->
-          <div class="process-node">
-            <div class="node-icon"><i class="fas fa-volume-up"></i></div>
-            <div class="node-label">Generated Audio</div>
-
-            <div class="audio-player-wrapper">
-              <div class="waveform-visualizer">
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
+            <!-- LLM -->
+            <div class="process-node highlight">
+              <div class="node-img-wrapper">
+                <img src="statics/images/openai.png" alt="OpenAI LLM" />
               </div>
-              <audio controls id="demo-audio-gen"></audio>
+              <div class="node-label">LLM Parsing</div>
+            </div>
+
+            <div class="arrow-right"><i class="fas fa-arrow-right"></i></div>
+
+            <!-- Parsed Output -->
+            <div class="process-node" id="node-parsed-text">
+              <div class="node-icon"><i class="fas fa-list-ul"></i></div>
+              <div class="node-label">Parsed Text</div>
+              <div class="node-content code-box" id="demo-parsed">...</div>
             </div>
           </div>
 
-          <div class="arrow-right"><i class="fas fa-arrow-right"></i></div>
+          <!-- Branch 2: Audio -->
+          <div class="pipeline-row" style="margin-top: 2rem;">
+            <!-- Generated Audio -->
+            <div class="process-node">
+              <div class="node-icon"><i class="fas fa-volume-up"></i></div>
+              <div class="node-label">Generated Audio</div>
 
-          <!-- LASS -->
-          <div class="process-node highlight">
-            <div class="node-img-wrapper">
-              <img src="statics/images/meta.png" alt="Meta LASS Model" />
-            </div>
-            <div class="node-label">LASS Separation</div>
-          </div>
-
-          <div class="arrow-right"><i class="fas fa-arrow-right"></i></div>
-
-          <!-- Separated Audio -->
-          <div class="process-node">
-            <div class="node-icon"><i class="fas fa-filter"></i></div>
-            <div class="node-label">Separated Audio</div>
-
-            <div class="audio-player-wrapper">
-              <div class="waveform-visualizer">
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
+              <div class="audio-player-wrapper">
+                <div class="waveform-visualizer">
+                  <div class="wave-bar"></div>
+                  <div class="wave-bar"></div>
+                  <div class="wave-bar"></div>
+                  <div class="wave-bar"></div>
+                  <div class="wave-bar"></div>
+                  <div class="wave-bar"></div>
+                  <div class="wave-bar"></div>
+                  <div class="wave-bar"></div>
+                  <div class="wave-bar"></div>
+                </div>
+                <audio controls id="demo-audio-gen"></audio>
               </div>
-              <audio controls id="demo-audio-sep"></audio>
+            </div>
+
+            <div class="arrow-right"><i class="fas fa-arrow-right"></i></div>
+
+            <!-- LASS -->
+            <div class="process-node highlight clickable-node" id="node-lass"
+              onclick="window.open('https://ai.meta.com/research/samaudio/', '_blank')">
+
+              <div class="node-img-wrapper">
+                <img src="statics/images/meta.png" alt="Meta LASS Model" />
+              </div>
+              <div class="node-label">LASS Separation <i class="fas fa-external-link-alt"
+                  style="margin-left:5px; font-size:0.8em; opacity:0.7;"></i></div>
+            </div>
+
+            <div class="arrow-right"><i class="fas fa-arrow-right"></i></div>
+
+            <!-- Separated Audio -->
+            <div class="process-node">
+              <div class="node-icon"><i class="fas fa-filter"></i></div>
+              <div class="node-label">Separated Audio</div>
+
+              <!-- Dynamic Audio List Container -->
+              <div id="demo-audio-sep-container" class="multi-audio-list">
+                <!-- Populated by JS -->
+              </div>
             </div>
           </div>
+
         </div>
+        <!-- End Scrollable Area -->
 
         <!-- Convergence -->
         <div class="pipeline-convergence">
@@ -217,9 +218,10 @@
 
         <!-- Final Model -->
         <div class="pipeline-row centered">
-          <div class="process-node final-model">
+          <div class="process-node final-model clickable-node" onclick="openModelPopup()">
             <div class="node-icon main-icon"><i class="fas fa-snowman"></i></div>
-            <div class="node-label">ELSA Model</div>
+            <div class="node-label">ELSA Model <i class="fas fa-search-plus"
+                style="margin-left:5px; font-size:0.8em; opacity:0.7;"></i></div>
           </div>
         </div>
 
@@ -487,7 +489,7 @@
       const demoText = document.getElementById('demo-text');
       const demoParsed = document.getElementById('demo-parsed');
       const demoAudioGen = document.getElementById('demo-audio-gen');
-      const demoAudioSep = document.getElementById('demo-audio-sep');
+      const demoAudioSepContainer = document.getElementById('demo-audio-sep-container'); // NEW Container
       const demoScore = document.getElementById('demo-score');
       const demoHumanScore = document.getElementById('demo-human-score').querySelector('span');
 
@@ -506,9 +508,86 @@
         demoScore.textContent = data.score;
         demoHumanScore.textContent = data.humanScore;
 
-        // Update audio sources
+        // Update Generated Audio (Single)
         demoAudioGen.src = data.audioGen;
-        demoAudioSep.src = data.audioSep;
+
+        // Update Separated Audio (Multiple) -- NEW LOGIC
+        demoAudioSepContainer.innerHTML = ''; // Clear previous
+
+        let parsedItems = [];
+        try {
+          parsedItems = JSON.parse(data.parsed); // Parse text to get labels
+        } catch (e) {
+          console.warn("Could not parse parsed text", e);
+        }
+
+        // Handle if audioSep is array or fallback to single string handling if data format varies
+        const audioSrcs = Array.isArray(data.audioSep) ? data.audioSep : [data.audioSep];
+
+        audioSrcs.forEach((src, index) => {
+          const row = document.createElement('div');
+          row.className = 'mini-player-row';
+
+          // Label
+          const labelText = parsedItems[index] || `Event ${index + 1}`;
+          const label = document.createElement('div');
+          label.className = 'mini-label';
+          label.textContent = labelText;
+          label.title = labelText; // Tooltip
+          row.appendChild(label);
+
+          // Play Button
+          const playBtn = document.createElement('button');
+          playBtn.className = 'mini-play-btn';
+          playBtn.innerHTML = '<i class="fas fa-play"></i>';
+          row.appendChild(playBtn);
+
+          // Mini Waveform
+          const wave = document.createElement('div');
+          wave.className = 'mini-waveform';
+          for (let i = 0; i < 5; i++) { // 5 bars
+            const bar = document.createElement('div');
+            bar.className = 'mini-wave-bar';
+            // Random height for variety
+            bar.style.height = `${30 + Math.random() * 70}%`;
+            bar.style.animationDelay = `${i * 0.1}s`;
+            wave.appendChild(bar);
+          }
+          row.appendChild(wave);
+
+          // Hidden Audio Element
+          const audio = document.createElement('audio');
+          audio.src = src;
+          audio.className = 'hidden-audio';
+          row.appendChild(audio);
+
+          // Play/Pause Logic
+          playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+              // Stop all others first (exclusive play)
+              document.querySelectorAll('audio').forEach(a => {
+                if (a !== audio) {
+                  a.pause();
+                  a.currentTime = 0;
+                }
+              });
+              audio.play();
+              playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+              row.classList.add('playing');
+            } else {
+              audio.pause();
+              playBtn.innerHTML = '<i class="fas fa-play"></i>';
+              row.classList.remove('playing');
+            }
+          });
+
+          audio.addEventListener('ended', () => {
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            row.classList.remove('playing');
+          });
+
+          demoAudioSepContainer.appendChild(row);
+        });
       }
 
       // Populate Select
@@ -693,6 +772,94 @@
         snowDepth = new Float32Array(Math.ceil(width / resolution)).fill(0);
       });
     });
+
+    // Toggle Model Popup (Global)
+    window.openModelPopup = function () {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightbox.style.display = 'flex';
+      setTimeout(() => {
+        lightbox.classList.add('active');
+      }, 10);
+      lightboxImg.src = 'statics/images/model.png';
+    };
+
+    // --- SVG Connector Logic ---
+    function drawConnector() {
+      const svg = document.getElementById('pipeline-svg');
+      // Update: Container is now the scroll area
+      const container = document.querySelector('.pipeline-scroll-area');
+      const startNode = document.getElementById('node-parsed-text');
+      const endNode = document.getElementById('node-lass');
+
+      if (!svg || !container || !startNode || !endNode) return;
+
+      // Get relative positions
+      const containerRect = container.getBoundingClientRect();
+      const startRect = startNode.getBoundingClientRect();
+      const endRect = endNode.getBoundingClientRect();
+
+      // Start: Bottom center of Parsed Text
+      const x1 = startRect.left + startRect.width / 2 - containerRect.left;
+      const y1 = startRect.bottom - containerRect.top;
+
+      // End: Top center of LASS
+      const x2 = endRect.left + endRect.width / 2 - containerRect.left;
+      const y2 = endRect.top - containerRect.top;
+
+      // Control points for cubic bezier (curving down then into top)
+      const c1x = x1;
+      const c1y = y1 + 50; // Down
+      const c2x = x2;
+      const c2y = y2 - 50; // Up from target
+
+      // Create Path
+      // Check if path exists
+      let path = document.getElementById('connector-path');
+      if (!path) {
+        path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.id = 'connector-path';
+        path.setAttribute("stroke", "rgba(167, 139, 250, 0.6)"); // Secondary color transparent
+        path.setAttribute("stroke-width", "2");
+        path.setAttribute("fill", "none");
+        path.setAttribute("stroke-dasharray", "5,5");
+        path.setAttribute("marker-end", "url(#arrowhead)");
+
+        // Define marker
+        let defs = svg.querySelector('defs');
+        if (!defs) {
+          defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+          const marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+          marker.id = "arrowhead";
+          marker.setAttribute("markerWidth", "10");
+          marker.setAttribute("markerHeight", "7");
+          marker.setAttribute("refX", "10");
+          marker.setAttribute("refY", "3.5");
+          marker.setAttribute("orient", "auto");
+          const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+          polygon.setAttribute("points", "0 0, 10 3.5, 0 7");
+          polygon.setAttribute("fill", "rgba(167, 139, 250, 0.6)");
+          marker.appendChild(polygon);
+          defs.appendChild(marker);
+          svg.appendChild(defs);
+        }
+        svg.appendChild(path);
+      }
+
+      // Update Path Data
+      const d = `M ${x1} ${y1} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${x2} ${y2}`;
+      path.setAttribute("d", d);
+    }
+
+    // Draw on load and resize
+    window.addEventListener('load', () => setTimeout(drawConnector, 500));
+    window.addEventListener('resize', drawConnector);
+    // Redraw when demo updates (in case of shifts)
+    const originalUpdateDemo = updateDemo;
+    updateDemo = function (id) {
+      originalUpdateDemo(id);
+      setTimeout(drawConnector, 300); // Slight delay for animations
+    };
   </script>
 </body>
 
