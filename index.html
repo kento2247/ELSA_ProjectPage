@@ -260,7 +260,6 @@
         <div class="carousel-track">
           <!-- Slide 1 -->
           <div class="carousel-slide">
-            <h3>Main Comparative Results</h3>
             <div class="image-container" style="border: none; background: transparent;">
               <img src="statics/images/table1.png" alt="Table 1" class="responsive-img" />
             </div>
@@ -269,7 +268,6 @@
 
           <!-- Slide 2 -->
           <div class="carousel-slide">
-            <h3>Ablation Studies</h3>
             <div class="image-container" style="border: none; background: transparent;">
               <img src="statics/images/table2.png" alt="Table 2" class="responsive-img" />
             </div>
@@ -278,7 +276,6 @@
 
           <!-- Slide 3 -->
           <div class="carousel-slide">
-            <h3>Additional Metrics</h3>
             <div class="image-container" style="border: none; background: transparent;">
               <img src="statics/images/table3.png" alt="Table 3" class="responsive-img" />
             </div>
@@ -337,7 +334,7 @@
         <pre><code id="citation-code">@inproceedings{elsa2026,
   title={ELSA: Acoustic Event-Level Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation},
   author={Author One and Author Two and Author Three},
-  booktitle={Interspeech 2026},
+  booktitle={Proc. Interspeech 2026},
   year={2026}
 }</code></pre>
       </div>
@@ -345,10 +342,7 @@
 
   </main>
 
-  <footer
-    style="text-align: center; padding: 2rem; color: var(--text-secondary); border-top: 1px solid var(--border-color); margin-top: 4rem;">
-    <p>&copy; 2026 ELSA Project. All rights reserved.</p>
-  </footer>
+
 
   <!-- Scripts -->
   <script>
@@ -644,32 +638,52 @@
       initDemo();
 
       // Audio Visualizer Animation Toggle
-      [demoAudioGen, demoAudioSep].forEach(audio => {
-        audio.addEventListener('play', function () {
-          this.parentElement.querySelector('.waveform-visualizer').classList.add('playing');
+      if (demoAudioGen) {
+        demoAudioGen.addEventListener('play', function () {
+          if (this.parentElement.querySelector('.waveform-visualizer'))
+            this.parentElement.querySelector('.waveform-visualizer').classList.add('playing');
         });
-        audio.addEventListener('pause', function () {
-          this.parentElement.querySelector('.waveform-visualizer').classList.remove('playing');
+        demoAudioGen.addEventListener('pause', function () {
+          if (this.parentElement.querySelector('.waveform-visualizer'))
+            this.parentElement.querySelector('.waveform-visualizer').classList.remove('playing');
         });
-        audio.addEventListener('ended', function () {
-          this.parentElement.querySelector('.waveform-visualizer').classList.remove('playing');
+        demoAudioGen.addEventListener('ended', function () {
+          if (this.parentElement.querySelector('.waveform-visualizer'))
+            this.parentElement.querySelector('.waveform-visualizer').classList.remove('playing');
         });
-      });
+      }
       const canvas = document.getElementById('snow-canvas');
       const ctx = canvas.getContext('2d');
 
-      let width = window.innerWidth;
-      let height = window.innerHeight;
-
-      canvas.width = width;
-      canvas.height = height;
-
+      let width, height;
+      let snowDepth;
+      const resolution = 4; // Accumulate every 4px for better performance
+      const flakeCount = 150; // Reduced snow
       const flakes = [];
-      const flakeCount = 200; // Increased density for better accumulation
 
-      // Accumulation buffer (height map)
-      const resolution = 2; // Pixel resolution for accumulation
-      let snowDepth = new Float32Array(Math.ceil(width / resolution)).fill(0);
+      function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+
+        // Handle HiDPI
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.scale(dpr, dpr);
+
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+
+        // Initialize or Resize Snow Depth Buffer
+        // We preserve existing snow if possible, but simplest is to reset or map
+        // For simplicity, we'll reset on major resize to avoid artifacts, or just clip
+        if (!snowDepth || snowDepth.length !== Math.ceil(width / resolution)) {
+          snowDepth = new Float32Array(Math.ceil(width / resolution)).fill(0);
+        }
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
 
       class Flake {
         constructor() {
@@ -678,56 +692,55 @@
 
         init(randomY = false) {
           this.x = Math.random() * width;
-          this.y = randomY ? Math.random() * height : -5;
-          this.size = Math.random() * 2 + 1; // 1-3px
-          this.speedY = Math.random() * 1 + 1; // Faster fall
-          this.speedX = Math.random() * 1 - 0.5; // -0.5 to 0.5
-          this.opacity = Math.random() * 0.5 + 0.3;
+          this.y = randomY ? Math.random() * height : -10;
+          this.size = Math.random() * 2 + 1.5;
+          this.speedY = Math.random() * 1.5 + 1;
+          this.speedX = (Math.random() - 0.5) * 1.5;
+
+          // Quantize opacity for batching (0.4, 0.7, 1.0)
+          const r = Math.random();
+          if (r < 0.33) this.opacity = "0.4";
+          else if (r < 0.66) this.opacity = "0.7";
+          else this.opacity = "1";
         }
 
         update() {
           this.y += this.speedY;
           this.x += this.speedX;
 
-          // Wrap horizontal
           if (this.x > width) this.x = 0;
           if (this.x < 0) this.x = width;
 
-          // Check collision with accumulated snow
+          // Accumulation Logic
           const index = Math.floor(this.x / resolution);
-          // Protect against out of bounds
           if (index >= 0 && index < snowDepth.length) {
-            const groundHeight = height - snowDepth[index];
+            const accumulation = snowDepth[index];
+            const groundY = height - accumulation;
 
-            if (this.y >= groundHeight) {
-              // Landed!
-              // Add to accumulation (with smoothing)
-              snowDepth[index] += 0.5 * this.size;
+            if (this.y >= groundY) {
+              snowDepth[index] += 0.8 * this.size;
 
-              // Slight smoothing neighbors
-              if (index > 0) snowDepth[index - 1] += 0.2 * this.size;
-              if (index < snowDepth.length - 1) snowDepth[index + 1] += 0.2 * this.size;
-
-              // Simple mechanism to prevent infinite buildup covering the screen
-              // Cap at 150px or simply let it pile. Let's cap at 20% of screen height to be safe.
-              if (snowDepth[index] > height * 0.2) {
-                snowDepth[index] = height * 0.2;
+              const spread = 2;
+              // Inline smooth for performance in update loop? 
+              // Actually smooth() was separate. Let's keep it locally logic or method.
+              // To match optimized structure, let's just do simple smoothing here
+              if (index > 0 && snowDepth[index] > snowDepth[index - 1] + 2) {
+                snowDepth[index]--; snowDepth[index - 1]++;
+              }
+              if (index < snowDepth.length - 1 && snowDepth[index] > snowDepth[index + 1] + 2) {
+                snowDepth[index]--; snowDepth[index + 1]++;
               }
 
-              // Reset flake to top
+              if (snowDepth[index] > height * 0.15) {
+                snowDepth[index] = height * 0.15;
+              }
+
               this.init(false);
             }
-          } else {
-            // Fallback if index out of bounds (shouldn't happen often)
-            if (this.y > height) this.init(false);
           }
-        }
 
-        draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-          ctx.fill();
+          // Floor fail-safe
+          if (this.y > height) this.init(false);
         }
       }
 
@@ -735,8 +748,8 @@
         flakes.push(new Flake());
       }
 
-      function drawAccumulatedSnow() {
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      function drawAccumulation() {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
         ctx.beginPath();
         ctx.moveTo(0, height);
         for (let i = 0; i < snowDepth.length; i++) {
@@ -746,37 +759,43 @@
         ctx.closePath();
         ctx.fill();
 
-        // Optional: Add a blurred "glow" for the top edge
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = 'white';
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = "rgba(255, 255, 255, 0.8)";
+        ctx.stroke();
+        ctx.shadowBlur = 0;
       }
 
       function animateSnow() {
         ctx.clearRect(0, 0, width, height);
 
-        // Draw accumulated snow
-        ctx.shadowBlur = 0; // Reset shadow for individual flakes
-        drawAccumulatedSnow();
+        drawAccumulation();
 
-        // Update and draw live flakes
-        flakes.forEach(flake => {
-          flake.update();
-          flake.draw();
+        // Optimized Batch Drawing: Group by opacity
+        const batches = { "0.4": [], "0.7": [], "1": [] };
+
+        flakes.forEach(f => {
+          f.update(); // Update physics
+          batches[f.opacity].push(f);
         });
 
+        ctx.fillStyle = 'white';
+        Object.keys(batches).forEach(op => {
+          if (batches[op].length === 0) return;
+
+          ctx.globalAlpha = parseFloat(op);
+          ctx.beginPath();
+          batches[op].forEach(f => {
+            ctx.moveTo(f.x, f.y);
+            ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
+          });
+          ctx.fill();
+        });
+
+        ctx.globalAlpha = 1.0;
         requestAnimationFrame(animateSnow);
       }
 
       animateSnow();
-
-      window.addEventListener('resize', () => {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
-        // Reset accumulation on resize for simplicity
-        snowDepth = new Float32Array(Math.ceil(width / resolution)).fill(0);
-      });
     });
 
     // Toggle Model Popup (Global)
