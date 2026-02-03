@@ -68,11 +68,16 @@ h1 {
   font-size: clamp(2rem, 5vw, 3.5rem);
   line-height: 1.2;
   margin-bottom: var(--spacing-sm);
+  filter: drop-shadow(0 0 10px rgba(103, 232, 249, 0.4));
+}
+
+.title-text {
   background: linear-gradient(135deg, #fff 0%, #67e8f9 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(103, 232, 249, 0.4));
+  /* display: inline-block; removed to allow natural wrapping if needed, though inline-block is often needed for transforms/certain background clips. 
+     Actually, background-clip: text works on inline elements too usually. */
 }
 
 h1 i {
