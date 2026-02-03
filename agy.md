@@ -2,7 +2,7 @@ project pageを作成したい
 タイトルは
 ELSA: Acoustic Event-Level Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation
 論文の内容は
-Paper_Instructions_and_Template_for_Interspeech_2026.pdf
+ELSA__Acoustic_Event_Wise_Semantic_Alignment_forFine_Grained_Reference_Free_Text_to_Audio_Evaluation.pdf
 
 動画や音声，スコア数値のテンプレートは用意可能
 モデル図や表はstatics/imagesにある

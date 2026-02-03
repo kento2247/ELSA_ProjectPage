@@ -1,9 +1,9 @@
 [
   {
     "id": "dog",
-    "label": "Dog Barking",
-    "text": "\"A large dog barking aggressively.\"",
-    "parsed": "[\"dog\", \"barking\", \"aggressively\"]",
+    "label": "RELATE_1(audioldm)",
+    "text": "\"A man talks as an engine idles loudly\"",
+    "parsed": "[\"engine idling\", \"man talking\"]",
     "audioGen": "#",
     "audioSep": [
       "#",
@@ -11,7 +11,7 @@
       "#"
     ],
     "score": "0.85",
-    "humanScore": "0.90"
+    "humanScore": "9"
   },
   {
     "id": "crowd",
