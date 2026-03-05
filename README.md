@@ -3,6 +3,7 @@
 This is the project page for the paper **"ELSA: Acoustic Event-Level Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation"**.
 
 ## Features
+- **Bulma Utilities**: Includes Bulma CSS for utility classes while keeping the custom visual theme.
 - **Elsa / Frozen Theme**: Deep midnight blue background, icy glassmorphism effects, and animated snow accumulation.
 - **Interactive Methodology Pipeline**: A dynamic visualization of the evaluation process (Text → LLM → Audio → LASS → Score).
 - **JSON-Driven Demo**: Easily extensible demo section powered by `demo.json`.
