@@ -130,7 +130,7 @@
             <div class="qual-input-pair-plus" aria-hidden="true"><i class="fas fa-plus"></i></div>
             <div class="qual-input-card qual-input-audio-card">
               <div class="qual-input-label">Input Audio</div>
-              <audio controls preload="none" src="statics/audios/20260224_0140_01kj5ntm5ae2eb2c9gq79wey2q.wav"></audio>
+              <audio controls preload="none" data-waveform="true" src="statics/audios/20260224_0140_01kj5ntm5ae2eb2c9gq79wey2q.wav"></audio>
             </div>
           </div>
           <div class="qual-flow-arrow qual-inner-arrow" aria-hidden="true"><i class="fas fa-arrow-down"></i></div>
@@ -167,15 +167,15 @@
           <div class="qual-event-list">
             <div class="qual-event-item">
               <div class="qual-event-title"><span class="qual-event-index">Event 01</span>Animal footsteps</div>
-              <audio controls preload="none" src="statics/audios/02.wav"></audio>
+              <audio controls preload="none" data-waveform="true" src="statics/audios/02.wav"></audio>
             </div>
             <div class="qual-event-item">
               <div class="qual-event-title"><span class="qual-event-index">Event 02</span>A bell ringing</div>
-              <audio controls preload="none" src="statics/audios/01.wav"></audio>
+              <audio controls preload="none" data-waveform="true" src="statics/audios/01.wav"></audio>
             </div>
             <div class="qual-event-item">
               <div class="qual-event-title"><span class="qual-event-index">Event 03</span>Blizzard wind blowing</div>
-              <audio controls preload="none" src="statics/audios/00.wav"></audio>
+              <audio controls preload="none" data-waveform="true" src="statics/audios/00.wav"></audio>
             </div>
           </div>
         </article>
@@ -417,6 +417,270 @@ To be appeared.
       // Initialize all carousels
       document.querySelectorAll('.carousel-container').forEach(el => {
         new Carousel(el, 7000);
+      });
+
+      // --- Audio Waveform Rendering ---
+      const waveformStates = new Map();
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      let decodeContext = null;
+
+      function ensureDecodeContext() {
+        if (!AudioContextClass) return null;
+        if (!decodeContext) decodeContext = new AudioContextClass();
+        return decodeContext;
+      }
+
+      function formatAudioTime(seconds) {
+        if (!Number.isFinite(seconds) || seconds < 0) return '--:--';
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60).toString().padStart(2, '0');
+        return `${minutes}:${remainingSeconds}`;
+      }
+
+      function resizeWaveformCanvas(canvas) {
+        const dpr = window.devicePixelRatio || 1;
+        const width = Math.max(1, Math.floor(canvas.clientWidth));
+        const height = Math.max(1, Math.floor(canvas.clientHeight));
+        const targetWidth = Math.floor(width * dpr);
+        const targetHeight = Math.floor(height * dpr);
+
+        if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+          canvas.width = targetWidth;
+          canvas.height = targetHeight;
+        }
+
+        return { width, height, dpr };
+      }
+
+      function updateWaveformTime(state) {
+        state.time.textContent = `${formatAudioTime(state.audio.currentTime)} / ${formatAudioTime(state.audio.duration)}`;
+      }
+
+      function drawWaveformPlaceholder(state, label = 'Loading waveform...') {
+        const { width, height, dpr } = resizeWaveformCanvas(state.canvas);
+        const ctx = state.canvas.getContext('2d');
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.fillRect(0, 0, width, height);
+        ctx.strokeStyle = 'rgba(103, 232, 249, 0.18)';
+        ctx.strokeRect(0.5, 0.5, width - 1, height - 1);
+        ctx.fillStyle = 'rgba(226, 232, 240, 0.74)';
+        ctx.font = '12px "IBM Plex Mono", monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(label, width / 2, height / 2);
+
+        state.status.textContent = label;
+      }
+
+      function computeWaveformPeaks(buffer, steps) {
+        const peaks = new Array(steps);
+        const samplesPerStep = Math.max(1, Math.floor(buffer.length / steps));
+
+        for (let step = 0; step < steps; step += 1) {
+          const start = step * samplesPerStep;
+          const end = Math.min(start + samplesPerStep, buffer.length);
+          let min = 1;
+          let max = -1;
+
+          for (let channel = 0; channel < buffer.numberOfChannels; channel += 1) {
+            const channelData = buffer.getChannelData(channel);
+            for (let index = start; index < end; index += 1) {
+              const value = channelData[index];
+              if (value < min) min = value;
+              if (value > max) max = value;
+            }
+          }
+
+          peaks[step] = { min, max };
+        }
+
+        return peaks;
+      }
+
+      function getCachedPeaks(state, width) {
+        if (!state.buffer) return [];
+        if (state.peakWidth === width && state.peaks.length) return state.peaks;
+
+        state.peaks = computeWaveformPeaks(state.buffer, Math.max(32, width));
+        state.peakWidth = width;
+        return state.peaks;
+      }
+
+      function drawPeakSeries(ctx, peaks, color, width, height, padding) {
+        const centerY = height / 2;
+        const drawableWidth = Math.max(1, width - padding * 2);
+        const amplitude = centerY - padding;
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.15;
+
+        peaks.forEach((peak, index) => {
+          const x = padding + (index / peaks.length) * drawableWidth;
+          const y1 = centerY + peak.min * amplitude;
+          const y2 = centerY + peak.max * amplitude;
+
+          ctx.beginPath();
+          ctx.moveTo(x, y1);
+          ctx.lineTo(x, y2);
+          ctx.stroke();
+        });
+      }
+
+      function drawWaveform(state, statusText = 'Waveform ready') {
+        if (!state.buffer) {
+          drawWaveformPlaceholder(state, state.status.textContent || 'Loading waveform...');
+          return;
+        }
+
+        const { width, height, dpr } = resizeWaveformCanvas(state.canvas);
+        const ctx = state.canvas.getContext('2d');
+        const padding = 8;
+        const playedRatio = state.audio.duration ? Math.min(state.audio.currentTime / state.audio.duration, 1) : 0;
+        const playedWidth = width * playedRatio;
+        const peaks = getCachedPeaks(state, width);
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(padding, height / 2);
+        ctx.lineTo(width - padding, height / 2);
+        ctx.stroke();
+
+        drawPeakSeries(ctx, peaks, 'rgba(226, 232, 240, 0.35)', width, height, padding);
+
+        if (playedWidth > 0) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(0, 0, playedWidth, height);
+          ctx.clip();
+          ctx.fillStyle = 'rgba(103, 232, 249, 0.12)';
+          ctx.fillRect(0, 0, playedWidth, height);
+          drawPeakSeries(ctx, peaks, 'rgba(103, 232, 249, 0.96)', width, height, padding);
+          ctx.restore();
+        }
+
+        ctx.fillStyle = 'rgba(103, 232, 249, 0.96)';
+        ctx.fillRect(Math.max(0, playedWidth - 1), 0, 2, height);
+
+        state.status.textContent = statusText;
+      }
+
+      async function loadWaveform(state) {
+        const source = state.audio.currentSrc || state.audio.src;
+        const context = ensureDecodeContext();
+
+        if (!source || !context) {
+          drawWaveformPlaceholder(state, 'Waveform unsupported');
+          return;
+        }
+
+        if (window.location.protocol === 'file:') {
+          drawWaveformPlaceholder(state, 'Use a local server for full waveform');
+          return;
+        }
+
+        try {
+          const response = await fetch(source);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const audioData = await response.arrayBuffer();
+          state.buffer = await context.decodeAudioData(audioData.slice(0));
+          updateWaveformTime(state);
+          drawWaveform(state, 'Waveform ready');
+        } catch (error) {
+          console.error('Failed to decode waveform', source, error);
+          drawWaveformPlaceholder(state, 'Waveform unavailable');
+        }
+      }
+
+      function decorateAudioWithWaveform(audio) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'waveform-audio';
+
+        const canvas = document.createElement('canvas');
+        canvas.className = 'waveform-canvas';
+        canvas.setAttribute('aria-hidden', 'true');
+
+        const meta = document.createElement('div');
+        meta.className = 'waveform-meta';
+
+        const status = document.createElement('span');
+        status.className = 'waveform-status';
+        status.textContent = 'Loading waveform...';
+
+        const time = document.createElement('span');
+        time.className = 'waveform-time';
+        time.textContent = '--:-- / --:--';
+
+        meta.append(status, time);
+        audio.parentNode.insertBefore(wrapper, audio);
+        wrapper.append(canvas, meta, audio);
+
+        const state = {
+          audio,
+          canvas,
+          status,
+          time,
+          peaks: [],
+          peakWidth: 0,
+          buffer: null
+        };
+
+        waveformStates.set(audio, state);
+        updateWaveformTime(state);
+        drawWaveformPlaceholder(state, 'Loading waveform...');
+
+        audio.addEventListener('loadedmetadata', () => {
+          updateWaveformTime(state);
+          if (state.buffer) drawWaveform(state, 'Waveform ready');
+        });
+        audio.addEventListener('durationchange', () => updateWaveformTime(state));
+        audio.addEventListener('timeupdate', () => {
+          updateWaveformTime(state);
+          if (state.buffer) drawWaveform(state, state.audio.paused ? 'Waveform ready' : 'Playing waveform');
+        });
+        audio.addEventListener('seeking', () => {
+          if (state.buffer) drawWaveform(state, state.audio.paused ? 'Waveform ready' : 'Playing waveform');
+        });
+        audio.addEventListener('seeked', () => {
+          updateWaveformTime(state);
+          if (state.buffer) drawWaveform(state, state.audio.paused ? 'Waveform ready' : 'Playing waveform');
+        });
+        audio.addEventListener('play', () => {
+          wrapper.classList.add('is-playing');
+          if (state.buffer) drawWaveform(state, 'Playing waveform');
+        });
+        audio.addEventListener('pause', () => {
+          wrapper.classList.remove('is-playing');
+          if (state.buffer) drawWaveform(state, 'Waveform ready');
+        });
+        audio.addEventListener('ended', () => {
+          wrapper.classList.remove('is-playing');
+          if (state.buffer) drawWaveform(state, 'Waveform ready');
+        });
+
+        loadWaveform(state);
+      }
+
+      document.querySelectorAll('audio[data-waveform="true"]').forEach(audio => {
+        decorateAudioWithWaveform(audio);
+      });
+
+      window.addEventListener('resize', () => {
+        waveformStates.forEach(state => {
+          if (state.buffer) {
+            drawWaveform(state, state.audio.paused ? 'Waveform ready' : 'Playing waveform');
+          } else {
+            drawWaveformPlaceholder(state, state.status.textContent);
+          }
+        });
       });
 
       const canvas = document.getElementById('snow-canvas');
