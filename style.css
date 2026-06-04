@@ -148,6 +148,7 @@ section {
 .authors {
   display: flex;
   justify-content: center;
+  align-items: baseline;
   flex-wrap: wrap;
   gap: var(--spacing-sm);
   margin: var(--spacing-md) 0;
@@ -156,7 +157,14 @@ section {
 
 .author {
   color: var(--primary-color);
+  display: inline-flex;
+  align-items: baseline;
   font-weight: 500;
+  line-height: 1.4;
+}
+
+.author sup {
+  line-height: 0;
 }
 
 .affiliations {
