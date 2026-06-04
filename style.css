@@ -162,11 +162,23 @@ section {
 .affiliations {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   gap: var(--spacing-md);
   color: var(--text-secondary);
   font-size: 0.95rem;
   margin-bottom: var(--spacing-md);
+}
+
+.affiliation {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.4;
+}
+
+.affiliation sup {
+  line-height: 0;
+  margin-right: 0.1em;
 }
 
 .action-buttons {

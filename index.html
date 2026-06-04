@@ -53,22 +53,28 @@
       </h1>
 
       <span class="is-size-4 has-text-weight-bold">
-        Under Review
+        INTERSPEECH 2026
       </span>
 
-      <!-- <div class="affiliations fade-in delay-2">
-        <span class="affiliation"><sup>1</sup>Institution One</span>
-        <span class="affiliation"><sup>2</sup>Institution Two</span>
-      </div> -->
+      <div class="authors fade-in delay-1">
+        <a class="author" href="mailto:shuntaro20021227@keio.jp">Shuntaro Suzuki<sup>*</sup></a>
+        <a class="author" href="mailto:tkento1985@keio.jp">Kento Tokura<sup>*</sup></a>
+        <a class="author" href="mailto:ydaichi1207@keio.jp">Daichi Yashima<sup>*</sup></a>
+        <a class="author" href="mailto:kanon-amemiya@keio.jp">Kanon Amemiya<sup>*</sup></a>
+        <a class="author" href="mailto:komei.sugiura@keio.jp">Komei Sugiura</a>
+        <a class="author" href="mailto:shinnosuke_takamichi@keio.jp">Shinnosuke Takamichi</a>
+      </div>
+
+      <div class="affiliations fade-in delay-2">
+        <span class="affiliation">Keio University</span>
+        <span class="affiliation"><sup>*</sup>Equal contribution</span>
+      </div>
 
       <div class="action-buttons fade-in delay-3">
-        <a href="#" class="btn unavailable-btn js-unavailable-link" aria-disabled="true"><i
-            class="fas fa-file-pdf"></i> Paper <i class="fas fa-lock"></i></a>
-        <a href="#" class="btn unavailable-btn js-unavailable-link" aria-disabled="true"><i class="fab fa-github"></i>
-          Code <i class="fas fa-lock"></i></a>
-      </div>
-      <div class="authors fade-in delay-1">
-        The paper is currently under review. The links will be made available after publication.
+        <a href="#" class="btn unavailable-btn js-unavailable-link" aria-disabled="true"><i class="fas fa-file-pdf"></i>
+          Paper <i class="fas fa-lock"></i></a>
+        <a href="https://github.com/kento2247/ELSA" class="btn"><i class="fab fa-github"></i>
+          Code</a>
       </div>
     </div>
   </header>
@@ -87,14 +93,20 @@
       <div class="card">
         <h2>Abstract</h2>
         <p class="text-content" style="max-width: 100%;">
-            Text-to-audio (TTA) generation, synthesizing audio from natural language, has been widely studied for its ability to capture precise user intent. 
-            To effectively advance TTA models, it is essential to reliably evaluate generated audio without relying on costly human subjective ratings, motivating the development of automatic evaluation metrics that correlate well with human judgments. 
-            While recent CLAP-based metrics provide practical reference-free solutions, their coarse-grained text–audio similarity matching often correlates poorly with human ratings. 
+          Text-to-audio (TTA) generation, synthesizing audio from natural language, has been widely studied for its
+          ability to capture precise user intent.
+          To effectively advance TTA models, it is essential to reliably evaluate generated audio without relying on
+          costly human subjective ratings, motivating the development of automatic evaluation metrics that correlate
+          well with human judgments.
+          While recent CLAP-based metrics provide practical reference-free solutions, their coarse-grained text–audio
+          similarity matching often correlates poorly with human ratings.
         </p>
         <p class="text-content" style="max-width: 100%;">
-            To address this, we propose ELSA, a reference-free evaluation metric for fine-grained text–audio alignment. 
-            ELSA decomposes generated audio guided by distinct acoustic events derived from the text query and assesses event-level alignment.
-            Experiments across four TTA benchmarks show that ELSA reveals a higher correlation with human subjective ratings than prior metrics, highlighting its effectiveness for reliable TTA evaluation.
+          To address this, we propose ELSA, a reference-free evaluation metric for fine-grained text–audio alignment.
+          ELSA decomposes generated audio guided by distinct acoustic events derived from the text query and assesses
+          event-level alignment.
+          Experiments across four TTA benchmarks show that ELSA reveals a higher correlation with human subjective
+          ratings than prior metrics, highlighting its effectiveness for reliable TTA evaluation.
         </p>
       </div>
     </section>
@@ -106,7 +118,9 @@
         <img src="statics/images/model.png" alt="ELSA Model Architecture" class="responsive-img" />
       </div>
       <p class="text-content" style="margin-bottom: 2rem;">
-        ELSA hierarchically evaluates global text–audio matching and fine-grained acoustic-event alignment by combining shared text–audio embeddings with event-level representations extracted via a text parser and a language-queried audio source separation model.
+        ELSA hierarchically evaluates global text–audio matching and fine-grained acoustic-event alignment by combining
+        shared text–audio embeddings with event-level representations extracted via a text parser and a language-queried
+        audio source separation model.
       </p>
     </section>
 
@@ -124,7 +138,8 @@
             <div class="qual-input-pair-plus" aria-hidden="true"><i class="fas fa-plus"></i></div>
             <div class="qual-input-card qual-input-audio-card">
               <div class="qual-input-label">Input Audio</div>
-              <audio controls preload="none" data-waveform="true" src="statics/audios/20260224_0140_01kj5ntm5ae2eb2c9gq79wey2q.wav"></audio>
+              <audio controls preload="none" data-waveform="true"
+                src="statics/audios/20260224_0140_01kj5ntm5ae2eb2c9gq79wey2q.wav"></audio>
             </div>
           </div>
           <div class="qual-flow-arrow qual-inner-arrow" aria-hidden="true"><i class="fas fa-arrow-down"></i></div>
@@ -196,7 +211,9 @@
             <div class="image-container" style="border: none; background: transparent;">
               <img src="statics/images/table1.png" alt="Table 1" class="responsive-img" />
             </div>
-            <p class="caption">Table 1: Correlation with human ratings across AudioCaps, Clotho, MusicCaps, and RELATE. ELSA consistently achieves the highest rank-correlation, improving Kendall's tau on REL by +13.1, +4.8, +1.5, and +4.5 points over the strongest baseline.</p>
+            <p class="caption">Table 1: Correlation with human ratings across AudioCaps, Clotho, MusicCaps, and RELATE.
+              ELSA consistently achieves the highest rank-correlation, improving Kendall's tau on REL by +13.1, +4.8,
+              +1.5, and +4.5 points over the strongest baseline.</p>
           </div>
 
           <!-- Slide 2 -->
@@ -204,7 +221,9 @@
             <div class="image-container" style="border: none; background: transparent;">
               <img src="statics/images/table2.png" alt="Table 2" class="responsive-img" />
             </div>
-            <p class="caption">Table 2: Compositional benchmark results on RELATE (IS/OS) and CompA (attribute/order). ELSA outperforms baselines on RELATE and wins 3 out of 4 CompA evaluation settings, showing stronger event-level compositional alignment.</p>
+            <p class="caption">Table 2: Compositional benchmark results on RELATE (IS/OS) and CompA (attribute/order).
+              ELSA outperforms baselines on RELATE and wins 3 out of 4 CompA evaluation settings, showing stronger
+              event-level compositional alignment.</p>
           </div>
 
           <!-- Slide 3 -->
@@ -212,7 +231,9 @@
             <div class="image-container" style="border: none; background: transparent;">
               <img src="statics/images/table3.png" alt="Table 3" class="responsive-img" />
             </div>
-            <p class="caption">Table 3: Component ablation on Clotho. Performance changes are relatively small across LASS variants, while changing the text-audio embedding space causes much larger drops, indicating ELSA is more sensitive to embedding quality than separator choice.</p>
+            <p class="caption">Table 3: Component ablation on Clotho. Performance changes are relatively small across
+              LASS variants, while changing the text-audio embedding space causes much larger drops, indicating ELSA is
+              more sensitive to embedding quality than separator choice.</p>
           </div>
         </div>
 
@@ -232,17 +253,24 @@
           <!-- Slide 1 -->
           <div class="carousel-slide">
             <div class="image-container" style="border: none; background: transparent;">
-              <img src="statics/images/analysis1.png" alt="Sensitivity analysis of metric-REL correlation by number of acoustic events" class="responsive-img" />
+              <img src="statics/images/analysis1.png"
+                alt="Sensitivity analysis of metric-REL correlation by number of acoustic events"
+                class="responsive-img" />
             </div>
-            <p class="caption">Figure 3: Sensitivity analysis of metric-REL correlation with respect to the number of acoustic events in the text query. ELSA maintains stronger correlation than CLAPScore variants across different event counts, indicating robust fine-grained alignment.</p>
+            <p class="caption">Figure 3: Sensitivity analysis of metric-REL correlation with respect to the number of
+              acoustic events in the text query. ELSA maintains stronger correlation than CLAPScore variants across
+              different event counts, indicating robust fine-grained alignment.</p>
           </div>
 
           <!-- Slide 2 -->
           <div class="carousel-slide">
             <div class="image-container" style="border: none; background: transparent;">
-              <img src="statics/images/analysis2.png" alt="Relationship between REL and ELSA on AudioCaps" class="responsive-img" />
+              <img src="statics/images/analysis2.png" alt="Relationship between REL and ELSA on AudioCaps"
+                class="responsive-img" />
             </div>
-            <p class="caption">Figure 4: Relationship between REL and ELSA on AudioCaps. ELSA follows REL's rank tendency but with a lower score scale, reflecting stricter event-level evaluation than coarse global matching.</p>
+            <p class="caption">Figure 4: Relationship between REL and ELSA on AudioCaps. ELSA follows REL's rank
+              tendency but with a lower score scale, reflecting stricter event-level evaluation than coarse global
+              matching.</p>
           </div>
         </div>
 
@@ -260,13 +288,12 @@
           <i class="fas fa-copy"></i> Copy
         </button>
         <pre><code id="citation-code">
-To be appeared.
-<!-- @inproceedings{elsa2026,
-  title={ELSA: Acoustic Event-Level Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation},
-  author={Author One and Author Two and Author Three},
-  booktitle={Proc. Interspeech 2026},
-  year={2026}
-} -->
+@inproceedings{suzuki2026elsa,
+  title = {ELSA: Acoustic Event-Level Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation},
+  author = {Shuntaro Suzuki and Kento Tokura and Daichi Yashima and Kanon Amemiya and Komei Sugiura and Shinnosuke Takamichi},
+  year = {2026},
+  booktitle = {The 27th Interspeech Conference (INTERSPEECH 2026)},
+}
 </code></pre>
       </div>
     </section>
