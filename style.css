@@ -1215,6 +1215,51 @@ footer {
   }
 }
 
+@media (max-width: 600px) {
+  :root {
+    --spacing-md: 1.25rem;
+    --spacing-lg: 2.5rem;
+  }
+
+  .container {
+    width: 100%;
+    max-width: none;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .hero {
+    padding: 4.5rem 0 2.5rem;
+  }
+
+  .card,
+  .qual-card {
+    padding: 1rem;
+  }
+
+  .image-container {
+    margin: 1rem 0;
+  }
+
+  .carousel-container {
+    padding-bottom: 2.5rem;
+  }
+
+  .carousel-slide {
+    padding: 0.5rem;
+  }
+
+  .text-content {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  pre {
+    padding: 1rem;
+    font-size: 0.78rem;
+  }
+}
+
 /* Interactive Demo Styles */
 
 .node-content {
