@@ -127,15 +127,15 @@ a:hover {
 .container {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-sm);
+  padding: 0 3cm;
 }
 
 section {
-  padding: var(--spacing-lg) 0;
+  padding: var(--spacing-md) 0;
 }
 
 .section {
-  padding: var(--spacing-lg) 0;
+  padding: var(--spacing-md) 0;
 }
 
 /* Header / Hero */
@@ -143,6 +143,10 @@ section {
   padding: 8rem 0 4rem;
   text-align: center;
   position: relative;
+}
+
+.venue {
+  font-size: 1.85rem;
 }
 
 .authors {
@@ -156,7 +160,7 @@ section {
 }
 
 .author {
-  color: var(--primary-color);
+  color: var(--text-primary);
   display: inline-flex;
   align-items: baseline;
   font-weight: 500;
@@ -173,8 +177,8 @@ section {
   align-items: center;
   flex-wrap: wrap;
   gap: var(--spacing-md);
-  color: var(--text-secondary);
-  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-size: 1.1rem;
   margin-bottom: var(--spacing-md);
 }
 
@@ -278,23 +282,23 @@ table {
 .image-container {
   overflow: hidden;
   margin: var(--spacing-md) 0;
+  border-radius: 0;
 }
 
 #custom-teaser .image-container {
-  max-width: 860px;
+  max-width: 700px;
   margin: var(--spacing-md) auto;
+  border-radius: 0;
+}
+
+#custom-teaser {
+  padding-top: 0;
 }
 
 .responsive-img {
   width: 100%;
   height: auto;
   display: block;
-  cursor: zoom-in;
-  transition: transform 0.2s;
-}
-
-.responsive-img:hover {
-  transform: scale(1.02);
 }
 
 .caption {

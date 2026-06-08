@@ -52,17 +52,17 @@
         </span>
       </h1>
 
-      <span class="is-size-4 has-text-weight-bold">
-        INTERSPEECH 2026
+      <span class="venue has-text-weight-bold">
+        Interspeech 2026
       </span>
 
       <div class="authors fade-in delay-1">
-        <a class="author" href="mailto:shuntaro20021227@keio.jp">Shuntaro Suzuki<sup>*</sup></a>
-        <a class="author" href="mailto:tkento1985@keio.jp">Kento Tokura<sup>*</sup></a>
-        <a class="author" href="mailto:ydaichi1207@keio.jp">Daichi Yashima<sup>*</sup></a>
-        <a class="author" href="mailto:kanon-amemiya@keio.jp">Kanon Amemiya<sup>*</sup></a>
-        <a class="author" href="mailto:komei.sugiura@keio.jp">Komei Sugiura</a>
-        <a class="author" href="mailto:shinnosuke_takamichi@keio.jp">Shinnosuke Takamichi</a>
+        <span class="author">Shuntaro Suzuki<sup>*</sup></span>
+        <span class="author">Kento Tokura<sup>*</sup></span>
+        <span class="author">Daichi Yashima<sup>*</sup></span>
+        <span class="author">Kanon Amemiya<sup>*</sup></span>
+        <span class="author">Komei Sugiura</span>
+        <span class="author">Shinnosuke Takamichi</span>
       </div>
 
       <div class="affiliations fade-in delay-2">
@@ -84,31 +84,29 @@
     <!-- Teaser -->
     <section id="custom-teaser" class="section fade-in delay-2">
       <div class="image-container">
-        <img src="statics/images/eye_catch.png" alt="Teaser Image showing ELSA concept" class="responsive-img" />
+        <img src="statics/images/eye_catch.png" alt="Teaser Image showing ELSA concept" />
       </div>
     </section>
 
     <!-- Abstract -->
     <section id="abstract" class="section fade-in">
-      <div class="card">
-        <h2>Abstract</h2>
-        <p class="text-content" style="max-width: 100%;">
-          Text-to-audio (TTA) generation, synthesizing audio from natural language, has been widely studied for its
-          ability to capture precise user intent.
-          To effectively advance TTA models, it is essential to reliably evaluate generated audio without relying on
-          costly human subjective ratings, motivating the development of automatic evaluation metrics that correlate
-          well with human judgments.
-          While recent CLAP-based metrics provide practical reference-free solutions, their coarse-grained text–audio
-          similarity matching often correlates poorly with human ratings.
-        </p>
-        <p class="text-content" style="max-width: 100%;">
-          To address this, we propose ELSA, a reference-free evaluation metric for fine-grained text–audio alignment.
-          ELSA decomposes generated audio guided by distinct acoustic events derived from the text query and assesses
-          event-level alignment.
-          Experiments across four TTA benchmarks show that ELSA reveals a higher correlation with human subjective
-          ratings than prior metrics, highlighting its effectiveness for reliable TTA evaluation.
-        </p>
-      </div>
+      <h2>Abstract</h2>
+      <p class="text-content" style="max-width: 100%;">
+        Text-to-audio (TTA) generation, synthesizing audio from natural language, has been widely studied for its
+        ability to capture precise user intent.
+        To effectively advance TTA models, it is essential to reliably evaluate generated audio without relying on
+        costly human subjective ratings, motivating the development of automatic evaluation metrics that correlate
+        well with human judgments.
+        While recent CLAP-based metrics provide practical reference-free solutions, their coarse-grained text–audio
+        similarity matching often correlates poorly with human ratings.
+      </p>
+      <p class="text-content" style="max-width: 100%;">
+        To address this, we propose ELSA, a reference-free evaluation metric for fine-grained text–audio alignment.
+        ELSA decomposes generated audio guided by distinct acoustic events derived from the text query and assesses
+        event-level alignment.
+        Experiments across four TTA benchmarks show that ELSA reveals a higher correlation with human subjective
+        ratings than prior metrics, highlighting its effectiveness for reliable TTA evaluation.
+      </p>
     </section>
 
     <!-- Method -->
@@ -117,7 +115,7 @@
       <div class="image-container">
         <img src="statics/images/model.png" alt="ELSA Model Architecture" class="responsive-img" />
       </div>
-      <p class="text-content" style="margin-bottom: 2rem;">
+      <p class="text-content" style="max-width: 100%; margin-bottom: 2rem;">
         ELSA hierarchically evaluates global text–audio matching and fine-grained acoustic-event alignment by combining
         shared text–audio embeddings with event-level representations extracted via a text parser and a language-queried
         audio source separation model.
@@ -132,12 +130,12 @@
         <article class="card qual-card">
           <div class="qual-input-pair">
             <div class="qual-input-card qual-input-text-card">
-              <div class="qual-input-label">Input Text</div>
+              <div class="qual-input-label">Text Query</div>
               "Strong blizzard wind in the background with a bell ringing followed by animal footsteps."
             </div>
             <div class="qual-input-pair-plus" aria-hidden="true"><i class="fas fa-plus"></i></div>
             <div class="qual-input-card qual-input-audio-card">
-              <div class="qual-input-label">Input Audio</div>
+              <div class="qual-input-label">Generated Audio</div>
               <audio controls preload="none" data-waveform="true"
                 src="statics/audios/20260224_0140_01kj5ntm5ae2eb2c9gq79wey2q.wav"></audio>
             </div>
@@ -150,14 +148,14 @@
               <div class="qual-process-arrow"><i class="fas fa-arrow-right"></i></div>
               <div class="qual-process-node qual-model-node qual-model-visual">
                 <img src="statics/images/openai.png" alt="OpenAI" />
-                <span>GPT-5.2</span>
+                <span>Acoustic Event Parser</span>
               </div>
               <div class="qual-process-arrow"><i class="fas fa-arrow-right"></i></div>
               <div class="qual-process-node">
                 <div class="qual-parsed-list">
-                  <span>Animal footsteps</span>
-                  <span>A bell ringing</span>
-                  <span>Blizzard wind blowing</span>
+                  <span>"Animal footsteps</span>
+                  <span>"A bell ringing"</span>
+                  <span>"Blizzard wind blowing"</span>
                 </div>
               </div>
             </div>
@@ -167,7 +165,7 @@
               <div class="qual-process-arrow"><i class="fas fa-arrow-right"></i></div>
               <div class="qual-process-node qual-model-node qual-model-visual">
                 <img src="statics/images/meta.png" alt="Meta" />
-                <span>SAMaudio</span>
+                <span>LASS</Source> </span>
               </div>
               <div class="qual-process-arrow"><i class="fas fa-arrow-right"></i></div>
               <div class="qual-process-node">Separated Tracks</div>
@@ -175,15 +173,15 @@
           </div>
           <div class="qual-event-list">
             <div class="qual-event-item">
-              <div class="qual-event-title"><span class="qual-event-index">Event 01</span>Animal footsteps</div>
+              <div class="qual-event-title"><span class="qual-event-index">Event 01</span>"Animal footsteps"</div>
               <audio controls preload="none" data-waveform="true" src="statics/audios/02.wav"></audio>
             </div>
             <div class="qual-event-item">
-              <div class="qual-event-title"><span class="qual-event-index">Event 02</span>A bell ringing</div>
+              <div class="qual-event-title"><span class="qual-event-index">Event 02</span>"A bell ringing"</div>
               <audio controls preload="none" data-waveform="true" src="statics/audios/01.wav"></audio>
             </div>
             <div class="qual-event-item">
-              <div class="qual-event-title"><span class="qual-event-index">Event 03</span>Blizzard wind blowing</div>
+              <div class="qual-event-title"><span class="qual-event-index">Event 03</span>"Blizzard wind blowing"</div>
               <audio controls preload="none" data-waveform="true" src="statics/audios/00.wav"></audio>
             </div>
           </div>
@@ -200,7 +198,7 @@
 
     <!-- Experimental Results (Carousel) -->
     <section id="results" class="section fade-in">
-      <h2>Quantitative Results</h2>
+      <h2>Results</h2>
 
       <div class="carousel-container" id="results-carousel">
         <button class="carousel-btn carousel-prev"><i class="fas fa-chevron-left"></i></button>
