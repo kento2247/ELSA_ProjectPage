@@ -52,17 +52,17 @@
         </span>
       </h1>
 
-      <span class="is-size-4 has-text-weight-bold">
-        INTERSPEECH 2026
+      <span class="venue has-text-weight-bold">
+        Interspeech 2026
       </span>
 
       <div class="authors fade-in delay-1">
-        <a class="author" href="mailto:shuntaro20021227@keio.jp">Shuntaro Suzuki<sup>*</sup></a>
-        <a class="author" href="mailto:tkento1985@keio.jp">Kento Tokura<sup>*</sup></a>
-        <a class="author" href="mailto:ydaichi1207@keio.jp">Daichi Yashima<sup>*</sup></a>
-        <a class="author" href="mailto:kanon-amemiya@keio.jp">Kanon Amemiya<sup>*</sup></a>
-        <a class="author" href="mailto:komei.sugiura@keio.jp">Komei Sugiura</a>
-        <a class="author" href="mailto:shinnosuke_takamichi@keio.jp">Shinnosuke Takamichi</a>
+        <span class="author">Shuntaro Suzuki<sup>*</sup></span>
+        <span class="author">Kento Tokura<sup>*</sup></span>
+        <span class="author">Daichi Yashima<sup>*</sup></span>
+        <span class="author">Kanon Amemiya<sup>*</sup></span>
+        <span class="author">Komei Sugiura</span>
+        <span class="author">Shinnosuke Takamichi</span>
       </div>
 
       <div class="affiliations fade-in delay-2">
@@ -84,31 +84,29 @@
     <!-- Teaser -->
     <section id="custom-teaser" class="section fade-in delay-2">
       <div class="image-container">
-        <img src="statics/images/eye_catch.png" alt="Teaser Image showing ELSA concept" class="responsive-img" />
+        <img src="statics/images/eye_catch.png" alt="Teaser Image showing ELSA concept" />
       </div>
     </section>
 
     <!-- Abstract -->
     <section id="abstract" class="section fade-in">
-      <div class="card">
-        <h2>Abstract</h2>
-        <p class="text-content" style="max-width: 100%;">
-          Text-to-audio (TTA) generation, synthesizing audio from natural language, has been widely studied for its
-          ability to capture precise user intent.
-          To effectively advance TTA models, it is essential to reliably evaluate generated audio without relying on
-          costly human subjective ratings, motivating the development of automatic evaluation metrics that correlate
-          well with human judgments.
-          While recent CLAP-based metrics provide practical reference-free solutions, their coarse-grained text–audio
-          similarity matching often correlates poorly with human ratings.
-        </p>
-        <p class="text-content" style="max-width: 100%;">
-          To address this, we propose ELSA, a reference-free evaluation metric for fine-grained text–audio alignment.
-          ELSA decomposes generated audio guided by distinct acoustic events derived from the text query and assesses
-          event-level alignment.
-          Experiments across four TTA benchmarks show that ELSA reveals a higher correlation with human subjective
-          ratings than prior metrics, highlighting its effectiveness for reliable TTA evaluation.
-        </p>
-      </div>
+      <h2>Abstract</h2>
+      <p class="text-content" style="max-width: 100%;">
+        Text-to-audio (TTA) generation, synthesizing audio from natural language, has been widely studied for its
+        ability to capture precise user intent.
+        To effectively advance TTA models, it is essential to reliably evaluate generated audio without relying on
+        costly human subjective ratings, motivating the development of automatic evaluation metrics that correlate
+        well with human judgments.
+        While recent CLAP-based metrics provide practical reference-free solutions, their coarse-grained text–audio
+        similarity matching often correlates poorly with human ratings.
+      </p>
+      <p class="text-content" style="max-width: 100%;">
+        To address this, we propose ELSA, a reference-free evaluation metric for fine-grained text–audio alignment.
+        ELSA decomposes generated audio guided by distinct acoustic events derived from the text query and assesses
+        event-level alignment.
+        Experiments across four TTA benchmarks show that ELSA reveals a higher correlation with human subjective
+        ratings than prior metrics, highlighting its effectiveness for reliable TTA evaluation.
+      </p>
     </section>
 
     <!-- Method -->
@@ -117,7 +115,7 @@
       <div class="image-container">
         <img src="statics/images/model.png" alt="ELSA Model Architecture" class="responsive-img" />
       </div>
-      <p class="text-content" style="margin-bottom: 2rem;">
+      <p class="text-content" style="max-width: 100%; margin-bottom: 2rem;">
         ELSA hierarchically evaluates global text–audio matching and fine-grained acoustic-event alignment by combining
         shared text–audio embeddings with event-level representations extracted via a text parser and a language-queried
         audio source separation model.
@@ -128,77 +126,86 @@
     <section id="demo" class="section fade-in">
       <h2>Qualitative Results</h2>
 
-      <div class="qual-flow">
-        <article class="card qual-card">
-          <div class="qual-input-pair">
-            <div class="qual-input-card qual-input-text-card">
-              <div class="qual-input-label">Input Text</div>
-              "Strong blizzard wind in the background with a bell ringing followed by animal footsteps."
-            </div>
-            <div class="qual-input-pair-plus" aria-hidden="true"><i class="fas fa-plus"></i></div>
-            <div class="qual-input-card qual-input-audio-card">
-              <div class="qual-input-label">Input Audio</div>
-              <audio controls preload="none" data-waveform="true"
-                src="statics/audios/20260224_0140_01kj5ntm5ae2eb2c9gq79wey2q.wav"></audio>
-            </div>
-          </div>
-          <div class="qual-flow-arrow qual-inner-arrow" aria-hidden="true"><i class="fas fa-arrow-down"></i></div>
+      <article class="ql-hflow">
 
-          <div class="qual-process-grid">
-            <div class="qual-process-row">
-              <div class="qual-process-node">Text branch</div>
-              <div class="qual-process-arrow"><i class="fas fa-arrow-right"></i></div>
-              <div class="qual-process-node qual-model-node qual-model-visual">
-                <img src="statics/images/openai.png" alt="OpenAI" />
-                <span>GPT-5.2</span>
-              </div>
-              <div class="qual-process-arrow"><i class="fas fa-arrow-right"></i></div>
-              <div class="qual-process-node">
-                <div class="qual-parsed-list">
-                  <span>Animal footsteps</span>
-                  <span>A bell ringing</span>
-                  <span>Blizzard wind blowing</span>
-                </div>
-              </div>
-            </div>
-            <div class="qual-flow-arrow qual-inner-arrow" aria-hidden="true"><i class="fas fa-arrow-down"></i></div>
-            <div class="qual-process-row">
-              <div class="qual-process-node">Audio branch</div>
-              <div class="qual-process-arrow"><i class="fas fa-arrow-right"></i></div>
-              <div class="qual-process-node qual-model-node qual-model-visual">
-                <img src="statics/images/meta.png" alt="Meta" />
-                <span>SAMaudio</span>
-              </div>
-              <div class="qual-process-arrow"><i class="fas fa-arrow-right"></i></div>
-              <div class="qual-process-node">Separated Tracks</div>
-            </div>
-          </div>
-          <div class="qual-event-list">
-            <div class="qual-event-item">
-              <div class="qual-event-title"><span class="qual-event-index">Event 01</span>Animal footsteps</div>
-              <audio controls preload="none" data-waveform="true" src="statics/audios/02.wav"></audio>
-            </div>
-            <div class="qual-event-item">
-              <div class="qual-event-title"><span class="qual-event-index">Event 02</span>A bell ringing</div>
-              <audio controls preload="none" data-waveform="true" src="statics/audios/01.wav"></audio>
-            </div>
-            <div class="qual-event-item">
-              <div class="qual-event-title"><span class="qual-event-index">Event 03</span>Blizzard wind blowing</div>
-              <audio controls preload="none" data-waveform="true" src="statics/audios/00.wav"></audio>
-            </div>
-          </div>
-        </article>
+        <!-- Col 1: Inputs (rows 2 & 4) -->
+        <div class="ql-input-cell ql-text-cell">
+          <div class="qual-input-label">Text Query</div>
+          <p class="ql-query-text">"Strong blizzard wind in the background with a bell ringing followed by animal footsteps."</p>
+        </div>
+        <div class="ql-input-cell ql-audio-cell">
+          <div class="qual-input-label">Generated Audio</div>
+          <audio controls preload="none" data-waveform="true"
+            src="statics/audios/20260224_0140_01kj5ntm5ae2eb2c9gq79wey2q.wav"></audio>
+        </div>
 
-        <div class="qual-flow-arrow" aria-hidden="true"><i class="fas fa-arrow-down"></i></div>
+        <!-- Col 2: Arrows to models (rows 2 & 4) -->
+        <div class="ql-arr ql-arr-r1"><i class="fas fa-arrow-right"></i></div>
+        <div class="ql-arr ql-arr-r2"><i class="fas fa-arrow-right"></i></div>
 
-        <article class="card qual-card qual-score-card">
-          <h3>ELSA Predicted Score</h3>
+        <!-- Col 3: AEP (row 2), connector (row 3), LASS (row 4) -->
+        <div class="ql-model-aep">
+          <div class="qual-process-node qual-model-node qual-model-visual">
+            <img src="statics/images/openai.png" alt="OpenAI" />
+            <span>Acoustic<br>Event Parser</span>
+          </div>
+        </div>
+        <div class="ql-down-connector-cell">
+          <div class="ql-down-arrow"></div>
+        </div>
+        <div class="ql-model-lass">
+          <div class="qual-process-node qual-model-node qual-model-visual">
+            <img src="statics/images/meta.png" alt="Meta" />
+            <span>LASS</span>
+          </div>
+        </div>
+
+        <!-- Col 4: Arrows (rows 2 & 4) -->
+        <div class="ql-arr ql-arr-m1"><i class="fas fa-arrow-right"></i></div>
+        <div class="ql-arr ql-arr-m2"><i class="fas fa-arrow-right"></i></div>
+
+        <!-- Col 5: Event results (3×3 grid + compare row) -->
+        <div class="ql-events-col">
+
+          <!-- Row 2: Event header + text groups (aligned with AEP) -->
+          <div class="ql-ev-group">
+            <span class="qual-event-index">Event 01</span>
+            <div class="ql-ev-text">"Animal footsteps"</div>
+          </div>
+          <div class="ql-ev-group">
+            <span class="qual-event-index">Event 02</span>
+            <div class="ql-ev-text">"A bell ringing"</div>
+          </div>
+          <div class="ql-ev-group">
+            <span class="qual-event-index">Event 03</span>
+            <div class="ql-ev-text">"Blizzard wind blowing"</div>
+          </div>
+
+          <!-- Compare row -->
+          <div class="ql-ev-compare"><div class="ql-cmp-connector" aria-hidden="true"><span class="ql-cmp-head ql-cmp-head-up"></span><span class="ql-cmp-head ql-cmp-head-down"></span></div></div>
+          <div class="ql-ev-compare"><div class="ql-cmp-connector" aria-hidden="true"><span class="ql-cmp-head ql-cmp-head-up"></span><span class="ql-cmp-head ql-cmp-head-down"></span></div></div>
+          <div class="ql-ev-compare"><div class="ql-cmp-connector" aria-hidden="true"><span class="ql-cmp-head ql-cmp-head-up"></span><span class="ql-cmp-head ql-cmp-head-down"></span></div></div>
+
+          <!-- Row 3: Spectrograms (from LASS) -->
+          <div class="ql-ev-audio"><audio controls preload="none" data-waveform="true" src="statics/audios/02.wav"></audio></div>
+          <div class="ql-ev-audio"><audio controls preload="none" data-waveform="true" src="statics/audios/01.wav"></audio></div>
+          <div class="ql-ev-audio"><audio controls preload="none" data-waveform="true" src="statics/audios/00.wav"></audio></div>
+
+        </div>
+
+        <!-- Col 6: Arrow to score -->
+        <div class="ql-arr ql-arr-score"><i class="fas fa-arrow-right"></i></div>
+
+        <!-- Col 7: ELSA Score -->
+        <div class="ql-score-cell">
+          <div class="ql-score-label">ELSA Score</div>
           <div class="qual-score-value">0.54</div>
-        </article>
-      </div>
+        </div>
+
+      </article>
     </section>
 
-    <!-- Experimental Results (Carousel) -->
+    <!-- Results & Analysis (Carousel) -->
     <section id="results" class="section fade-in">
       <h2>Quantitative Results</h2>
 
@@ -206,9 +213,8 @@
         <button class="carousel-btn carousel-prev"><i class="fas fa-chevron-left"></i></button>
 
         <div class="carousel-track">
-          <!-- Slide 1 -->
           <div class="carousel-slide">
-            <div class="image-container" style="border: none; background: transparent;">
+            <div class="image-container" style="border: none; background: transparent; box-shadow: none;">
               <img src="statics/images/table1.png" alt="Table 1" class="responsive-img" />
             </div>
             <p class="caption">Table 1: Correlation with human ratings across AudioCaps, Clotho, MusicCaps, and RELATE.
@@ -216,9 +222,8 @@
               +1.5, and +4.5 points over the strongest baseline.</p>
           </div>
 
-          <!-- Slide 2 -->
           <div class="carousel-slide">
-            <div class="image-container" style="border: none; background: transparent;">
+            <div class="image-container" style="border: none; background: transparent; box-shadow: none;">
               <img src="statics/images/table2.png" alt="Table 2" class="responsive-img" />
             </div>
             <p class="caption">Table 2: Compositional benchmark results on RELATE (IS/OS) and CompA (attribute/order).
@@ -226,33 +231,17 @@
               event-level compositional alignment.</p>
           </div>
 
-          <!-- Slide 3 -->
           <div class="carousel-slide">
-            <div class="image-container" style="border: none; background: transparent;">
+            <div class="image-container" style="border: none; background: transparent; box-shadow: none;">
               <img src="statics/images/table3.png" alt="Table 3" class="responsive-img" />
             </div>
             <p class="caption">Table 3: Component ablation on Clotho. Performance changes are relatively small across
               LASS variants, while changing the text-audio embedding space causes much larger drops, indicating ELSA is
               more sensitive to embedding quality than separator choice.</p>
           </div>
-        </div>
 
-        <button class="carousel-btn carousel-next"><i class="fas fa-chevron-right"></i></button>
-
-        <div class="carousel-dots"></div>
-      </div>
-    </section>
-
-    <!-- Analysis -->
-    <section id="analysis" class="section fade-in">
-      <h2>Analysis</h2>
-      <div class="carousel-container" id="analysis-carousel">
-        <button class="carousel-btn carousel-prev"><i class="fas fa-chevron-left"></i></button>
-
-        <div class="carousel-track">
-          <!-- Slide 1 -->
           <div class="carousel-slide">
-            <div class="image-container" style="border: none; background: transparent;">
+            <div class="image-container" style="border: none; background: transparent; box-shadow: none;">
               <img src="statics/images/analysis1.png"
                 alt="Sensitivity analysis of metric-REL correlation by number of acoustic events"
                 class="responsive-img" />
@@ -262,9 +251,8 @@
               different event counts, indicating robust fine-grained alignment.</p>
           </div>
 
-          <!-- Slide 2 -->
           <div class="carousel-slide">
-            <div class="image-container" style="border: none; background: transparent;">
+            <div class="image-container" style="border: none; background: transparent; box-shadow: none;">
               <img src="statics/images/analysis2.png" alt="Relationship between REL and ELSA on AudioCaps"
                 class="responsive-img" />
             </div>
@@ -440,267 +428,150 @@
         new Carousel(el, 7000);
       });
 
-      // --- Audio Waveform Rendering ---
-      const waveformStates = new Map();
-      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-      let decodeContext = null;
+      // --- Mel Spectrogram Player (image-based, custom controls) ---
+      const spectrogramStates = new Map();
 
-      function ensureDecodeContext() {
-        if (!AudioContextClass) return null;
-        if (!decodeContext) decodeContext = new AudioContextClass();
-        return decodeContext;
+      function spectrogramImagePath(src) {
+        return 'statics/spectrograms/' + src.split('/').pop().replace(/\.[^.]+$/, '.png');
       }
 
-      function formatAudioTime(seconds) {
-        if (!Number.isFinite(seconds) || seconds < 0) return '--:--';
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = Math.floor(seconds % 60).toString().padStart(2, '0');
-        return `${minutes}:${remainingSeconds}`;
+      function formatAudioTime(s) {
+        if (!Number.isFinite(s) || s < 0) return '0:00';
+        return `${Math.floor(s / 60)}:${Math.floor(s % 60).toString().padStart(2, '0')}`;
       }
 
-      function resizeWaveformCanvas(canvas) {
+      function resizeCanvas(canvas) {
         const dpr = window.devicePixelRatio || 1;
-        const width = Math.max(1, Math.floor(canvas.clientWidth));
-        const height = Math.max(1, Math.floor(canvas.clientHeight));
-        const targetWidth = Math.floor(width * dpr);
-        const targetHeight = Math.floor(height * dpr);
-
-        if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
-          canvas.width = targetWidth;
-          canvas.height = targetHeight;
+        const w = Math.max(1, Math.floor(canvas.clientWidth));
+        const h = Math.max(1, Math.floor(canvas.clientHeight));
+        if (canvas.width !== Math.floor(w * dpr) || canvas.height !== Math.floor(h * dpr)) {
+          canvas.width = Math.floor(w * dpr);
+          canvas.height = Math.floor(h * dpr);
         }
-
-        return { width, height, dpr };
+        return { w, h, dpr };
       }
 
-      function updateWaveformTime(state) {
-        state.time.textContent = `${formatAudioTime(state.audio.currentTime)} / ${formatAudioTime(state.audio.duration)}`;
-      }
-
-      function drawWaveformPlaceholder(state, label = 'Loading waveform...') {
-        const { width, height, dpr } = resizeWaveformCanvas(state.canvas);
+      function drawPlaceholder(state, label) {
+        const { w, h, dpr } = resizeCanvas(state.canvas);
         const ctx = state.canvas.getContext('2d');
-
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        ctx.clearRect(0, 0, width, height);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
-        ctx.fillRect(0, 0, width, height);
-        ctx.strokeStyle = 'rgba(103, 232, 249, 0.18)';
-        ctx.strokeRect(0.5, 0.5, width - 1, height - 1);
-        ctx.fillStyle = 'rgba(226, 232, 240, 0.74)';
-        ctx.font = '12px "IBM Plex Mono", monospace';
+        ctx.fillStyle = 'rgba(11, 17, 32, 0.9)';
+        ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = 'rgba(186, 230, 253, 0.4)';
+        ctx.font = '11px "Fira Code", monospace';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(label, width / 2, height / 2);
-
-        state.status.textContent = label;
+        ctx.fillText(label, w / 2, h / 2);
       }
 
-      function computeWaveformPeaks(buffer, steps) {
-        const peaks = new Array(steps);
-        const samplesPerStep = Math.max(1, Math.floor(buffer.length / steps));
-
-        for (let step = 0; step < steps; step += 1) {
-          const start = step * samplesPerStep;
-          const end = Math.min(start + samplesPerStep, buffer.length);
-          let min = 1;
-          let max = -1;
-
-          for (let channel = 0; channel < buffer.numberOfChannels; channel += 1) {
-            const channelData = buffer.getChannelData(channel);
-            for (let index = start; index < end; index += 1) {
-              const value = channelData[index];
-              if (value < min) min = value;
-              if (value > max) max = value;
-            }
-          }
-
-          peaks[step] = { min, max };
-        }
-
-        return peaks;
-      }
-
-      function getCachedPeaks(state, width) {
-        if (!state.buffer) return [];
-        if (state.peakWidth === width && state.peaks.length) return state.peaks;
-
-        state.peaks = computeWaveformPeaks(state.buffer, Math.max(32, width));
-        state.peakWidth = width;
-        return state.peaks;
-      }
-
-      function drawPeakSeries(ctx, peaks, color, width, height, padding) {
-        const centerY = height / 2;
-        const drawableWidth = Math.max(1, width - padding * 2);
-        const amplitude = centerY - padding;
-
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 1.15;
-
-        peaks.forEach((peak, index) => {
-          const x = padding + (index / peaks.length) * drawableWidth;
-          const y1 = centerY + peak.min * amplitude;
-          const y2 = centerY + peak.max * amplitude;
-
-          ctx.beginPath();
-          ctx.moveTo(x, y1);
-          ctx.lineTo(x, y2);
-          ctx.stroke();
-        });
-      }
-
-      function drawWaveform(state, statusText = 'Waveform ready') {
-        if (!state.buffer) {
-          drawWaveformPlaceholder(state, state.status.textContent || 'Loading waveform...');
-          return;
-        }
-
-        const { width, height, dpr } = resizeWaveformCanvas(state.canvas);
+      function drawSpectrogram(state) {
+        if (!state.img) return;
+        const { w, h, dpr } = resizeCanvas(state.canvas);
         const ctx = state.canvas.getContext('2d');
-        const padding = 8;
-        const playedRatio = state.audio.duration ? Math.min(state.audio.currentTime / state.audio.duration, 1) : 0;
-        const playedWidth = width * playedRatio;
-        const peaks = getCachedPeaks(state, width);
-
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        ctx.clearRect(0, 0, width, height);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
-        ctx.fillRect(0, 0, width, height);
 
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(padding, height / 2);
-        ctx.lineTo(width - padding, height / 2);
-        ctx.stroke();
+        // Full spectrogram
+        ctx.drawImage(state.img, 0, 0, w, h);
 
-        drawPeakSeries(ctx, peaks, 'rgba(226, 232, 240, 0.35)', width, height, padding);
-
-        if (playedWidth > 0) {
-          ctx.save();
-          ctx.beginPath();
-          ctx.rect(0, 0, playedWidth, height);
-          ctx.clip();
-          ctx.fillStyle = 'rgba(103, 232, 249, 0.12)';
-          ctx.fillRect(0, 0, playedWidth, height);
-          drawPeakSeries(ctx, peaks, 'rgba(103, 232, 249, 0.96)', width, height, padding);
-          ctx.restore();
+        // Dark overlay on unplayed portion
+        const ratio = state.audio.duration ? Math.min(state.audio.currentTime / state.audio.duration, 1) : 0;
+        const playedX = ratio * w;
+        if (playedX < w) {
+          ctx.fillStyle = 'rgba(2, 6, 23, 0.58)';
+          ctx.fillRect(playedX, 0, w - playedX, h);
         }
 
-        ctx.fillStyle = 'rgba(103, 232, 249, 0.96)';
-        ctx.fillRect(Math.max(0, playedWidth - 1), 0, 2, height);
+        // Playhead
+        if (ratio > 0) {
+          ctx.fillStyle = 'rgba(103, 232, 249, 0.4)';
+          ctx.fillRect(Math.max(0, playedX - 3), 0, 6, h);
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+          ctx.fillRect(Math.max(0, playedX - 1), 0, 2, h);
+        }
 
-        state.status.textContent = statusText;
+        // Time label bottom-right
+        const elapsed = formatAudioTime(state.audio.currentTime);
+        const total = formatAudioTime(state.audio.duration);
+        const label = `${elapsed} / ${total}`;
+        ctx.font = `bold 11px "Fira Code", monospace`;
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'bottom';
+        ctx.fillStyle = 'rgba(0,0,0,0.55)';
+        ctx.fillText(label, w - 7, h - 4);
+        ctx.fillStyle = 'rgba(186, 230, 253, 0.85)';
+        ctx.fillText(label, w - 8, h - 5);
       }
 
-      async function loadWaveform(state) {
-        const source = state.audio.currentSrc || state.audio.src;
-        const context = ensureDecodeContext();
+      function decorateAudioWithSpectrogram(audio) {
+        audio.removeAttribute('controls');
 
-        if (!source || !context) {
-          drawWaveformPlaceholder(state, 'Waveform unsupported');
-          return;
-        }
-
-        if (window.location.protocol === 'file:') {
-          drawWaveformPlaceholder(state, 'Use a local server for full waveform');
-          return;
-        }
-
-        try {
-          const response = await fetch(source);
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          const audioData = await response.arrayBuffer();
-          state.buffer = await context.decodeAudioData(audioData.slice(0));
-          updateWaveformTime(state);
-          drawWaveform(state, 'Waveform ready');
-        } catch (error) {
-          console.error('Failed to decode waveform', source, error);
-          drawWaveformPlaceholder(state, 'Waveform unavailable');
-        }
-      }
-
-      function decorateAudioWithWaveform(audio) {
         const wrapper = document.createElement('div');
-        wrapper.className = 'waveform-audio';
+        wrapper.className = 'sp-player';
 
         const canvas = document.createElement('canvas');
-        canvas.className = 'waveform-canvas';
-        canvas.setAttribute('aria-hidden', 'true');
+        canvas.className = 'sp-canvas';
 
-        const meta = document.createElement('div');
-        meta.className = 'waveform-meta';
+        // Play/pause button overlay
+        const btn = document.createElement('button');
+        btn.className = 'sp-play-btn';
+        btn.setAttribute('aria-label', 'Play');
+        btn.innerHTML = '<i class="fas fa-play"></i>';
 
-        const status = document.createElement('span');
-        status.className = 'waveform-status';
-        status.textContent = 'Loading waveform...';
-
-        const time = document.createElement('span');
-        time.className = 'waveform-time';
-        time.textContent = '--:-- / --:--';
-
-        meta.append(status, time);
         audio.parentNode.insertBefore(wrapper, audio);
-        wrapper.append(canvas, meta, audio);
+        wrapper.append(canvas, btn, audio);
 
-        const state = {
-          audio,
-          canvas,
-          status,
-          time,
-          peaks: [],
-          peakWidth: 0,
-          buffer: null
-        };
+        const state = { audio, canvas, btn, img: null };
+        spectrogramStates.set(audio, state);
 
-        waveformStates.set(audio, state);
-        updateWaveformTime(state);
-        drawWaveformPlaceholder(state, 'Loading waveform...');
+        drawPlaceholder(state, 'Loading…');
 
-        audio.addEventListener('loadedmetadata', () => {
-          updateWaveformTime(state);
-          if (state.buffer) drawWaveform(state, 'Waveform ready');
+        // Load spectrogram image
+        const img = new Image();
+        img.onload = () => { state.img = img; drawSpectrogram(state); };
+        img.onerror = () => drawPlaceholder(state, 'Spectrogram unavailable');
+        img.src = spectrogramImagePath(audio.src || audio.getAttribute('src'));
+
+        // Toggle play/pause
+        function togglePlay() {
+          if (audio.paused) audio.play();
+          else audio.pause();
+        }
+        btn.addEventListener('click', e => { e.stopPropagation(); togglePlay(); });
+        canvas.addEventListener('click', e => {
+          if (!audio.duration) { togglePlay(); return; }
+          const rect = canvas.getBoundingClientRect();
+          const ratio = (e.clientX - rect.left) / rect.width;
+          audio.currentTime = ratio * audio.duration;
+          if (audio.paused) audio.play();
         });
-        audio.addEventListener('durationchange', () => updateWaveformTime(state));
-        audio.addEventListener('timeupdate', () => {
-          updateWaveformTime(state);
-          if (state.buffer) drawWaveform(state, state.audio.paused ? 'Waveform ready' : 'Playing waveform');
-        });
-        audio.addEventListener('seeking', () => {
-          if (state.buffer) drawWaveform(state, state.audio.paused ? 'Waveform ready' : 'Playing waveform');
-        });
-        audio.addEventListener('seeked', () => {
-          updateWaveformTime(state);
-          if (state.buffer) drawWaveform(state, state.audio.paused ? 'Waveform ready' : 'Playing waveform');
-        });
+
         audio.addEventListener('play', () => {
           wrapper.classList.add('is-playing');
-          if (state.buffer) drawWaveform(state, 'Playing waveform');
+          btn.innerHTML = '<i class="fas fa-pause"></i>';
+          btn.setAttribute('aria-label', 'Pause');
         });
         audio.addEventListener('pause', () => {
           wrapper.classList.remove('is-playing');
-          if (state.buffer) drawWaveform(state, 'Waveform ready');
+          btn.innerHTML = '<i class="fas fa-play"></i>';
+          btn.setAttribute('aria-label', 'Play');
         });
         audio.addEventListener('ended', () => {
           wrapper.classList.remove('is-playing');
-          if (state.buffer) drawWaveform(state, 'Waveform ready');
+          btn.innerHTML = '<i class="fas fa-play"></i>';
         });
-
-        loadWaveform(state);
+        audio.addEventListener('timeupdate', () => drawSpectrogram(state));
+        audio.addEventListener('seeking',    () => drawSpectrogram(state));
+        audio.addEventListener('loadedmetadata', () => drawSpectrogram(state));
       }
 
       document.querySelectorAll('audio[data-waveform="true"]').forEach(audio => {
-        decorateAudioWithWaveform(audio);
+        decorateAudioWithSpectrogram(audio);
       });
 
       window.addEventListener('resize', () => {
-        waveformStates.forEach(state => {
-          if (state.buffer) {
-            drawWaveform(state, state.audio.paused ? 'Waveform ready' : 'Playing waveform');
-          } else {
-            drawWaveformPlaceholder(state, state.status.textContent);
-          }
+        spectrogramStates.forEach(state => {
+          if (state.img) drawSpectrogram(state);
+          else drawPlaceholder(state, 'Loading…');
         });
       });
 
