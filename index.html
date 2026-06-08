@@ -126,71 +126,83 @@
     <section id="demo" class="section fade-in">
       <h2>Qualitative Results</h2>
 
-      <div class="qual-flow">
-        <article class="card qual-card">
+      <article class="ql-hflow">
 
-          <!-- Inputs -->
-          <div class="ql-inputs">
-            <div class="ql-input-block ql-input-text">
-              <div class="qual-input-label">Text Query</div>
-              <p class="ql-query-text">"Strong blizzard wind in the background with a bell ringing followed by animal footsteps."</p>
-            </div>
-            <div class="ql-input-block ql-input-audio">
-              <div class="qual-input-label">Generated Audio</div>
-              <audio controls preload="none" data-waveform="true"
-                src="statics/audios/20260224_0140_01kj5ntm5ae2eb2c9gq79wey2q.wav"></audio>
-            </div>
+        <!-- Col 1: Inputs (rows 2 & 4) -->
+        <div class="ql-input-cell ql-text-cell">
+          <div class="qual-input-label">Text Query</div>
+          <p class="ql-query-text">"Strong blizzard wind in the background with a bell ringing followed by animal footsteps."</p>
+        </div>
+        <div class="ql-input-cell ql-audio-cell">
+          <div class="qual-input-label">Generated Audio</div>
+          <audio controls preload="none" data-waveform="true"
+            src="statics/audios/20260224_0140_01kj5ntm5ae2eb2c9gq79wey2q.wav"></audio>
+        </div>
+
+        <!-- Col 2: Arrows to models (rows 2 & 4) -->
+        <div class="ql-arr ql-arr-r1"><i class="fas fa-arrow-right"></i></div>
+        <div class="ql-arr ql-arr-r2"><i class="fas fa-arrow-right"></i></div>
+
+        <!-- Col 3: AEP (row 2), connector (row 3), LASS (row 4) -->
+        <div class="ql-model-aep">
+          <div class="qual-process-node qual-model-node qual-model-visual">
+            <img src="statics/images/openai.png" alt="OpenAI" />
+            <span>Acoustic<br>Event Parser</span>
+          </div>
+        </div>
+        <div class="ql-down-connector-cell">
+          <div class="ql-down-arrow"></div>
+        </div>
+        <div class="ql-model-lass">
+          <div class="qual-process-node qual-model-node qual-model-visual">
+            <img src="statics/images/meta.png" alt="Meta" />
+            <span>LASS</span>
+          </div>
+        </div>
+
+        <!-- Col 4: Arrows (rows 2 & 4) -->
+        <div class="ql-arr ql-arr-m1"><i class="fas fa-arrow-right"></i></div>
+        <div class="ql-arr ql-arr-m2"><i class="fas fa-arrow-right"></i></div>
+
+        <!-- Col 5: Event results (3×3 grid + compare row) -->
+        <div class="ql-events-col">
+
+          <!-- Row 2: Event header + text groups (aligned with AEP) -->
+          <div class="ql-ev-group">
+            <span class="qual-event-index">Event 01</span>
+            <div class="ql-ev-text">"Animal footsteps"</div>
+          </div>
+          <div class="ql-ev-group">
+            <span class="qual-event-index">Event 02</span>
+            <div class="ql-ev-text">"A bell ringing"</div>
+          </div>
+          <div class="ql-ev-group">
+            <span class="qual-event-index">Event 03</span>
+            <div class="ql-ev-text">"Blizzard wind blowing"</div>
           </div>
 
-          <!-- Pipeline arrows -->
-          <div class="ql-pipeline">
-            <div class="ql-pipeline-branch">
-              <div class="ql-branch-arrow"><i class="fas fa-arrow-down"></i></div>
-              <div class="qual-process-node qual-model-node qual-model-visual">
-                <img src="statics/images/openai.png" alt="OpenAI" />
-                <span>Acoustic Event Parser</span>
-              </div>
-            </div>
-            <div class="ql-pipeline-branch">
-              <div class="ql-branch-arrow"><i class="fas fa-arrow-down"></i></div>
-              <div class="qual-process-node qual-model-node qual-model-visual">
-                <img src="statics/images/meta.png" alt="Meta" />
-                <span>LASS</span>
-              </div>
-            </div>
-          </div>
+          <!-- Compare row -->
+          <div class="ql-ev-compare"><div class="ql-cmp-connector" aria-hidden="true"><span class="ql-cmp-head ql-cmp-head-up"></span><span class="ql-cmp-head ql-cmp-head-down"></span></div></div>
+          <div class="ql-ev-compare"><div class="ql-cmp-connector" aria-hidden="true"><span class="ql-cmp-head ql-cmp-head-up"></span><span class="ql-cmp-head ql-cmp-head-down"></span></div></div>
+          <div class="ql-ev-compare"><div class="ql-cmp-connector" aria-hidden="true"><span class="ql-cmp-head ql-cmp-head-up"></span><span class="ql-cmp-head ql-cmp-head-down"></span></div></div>
 
-          <!-- Down arrow -->
-          <div class="qual-flow-arrow qual-inner-arrow" aria-hidden="true"><i class="fas fa-arrow-down"></i></div>
+          <!-- Row 3: Spectrograms (from LASS) -->
+          <div class="ql-ev-audio"><audio controls preload="none" data-waveform="true" src="statics/audios/02.wav"></audio></div>
+          <div class="ql-ev-audio"><audio controls preload="none" data-waveform="true" src="statics/audios/01.wav"></audio></div>
+          <div class="ql-ev-audio"><audio controls preload="none" data-waveform="true" src="statics/audios/00.wav"></audio></div>
 
-          <!-- Event results table -->
-          <div class="ql-results-table">
-            <div class="ql-results-col-header">Acoustic Event</div>
-            <div class="ql-results-col-header">Audio Segment</div>
-            <div class="ql-results-col-header">Similarity</div>
+        </div>
 
-            <div class="ql-event-text"><span class="qual-event-index">Event 01</span>"Animal footsteps"</div>
-            <div class="ql-event-audio"><audio controls preload="none" data-waveform="true" src="statics/audios/02.wav"></audio></div>
-            <div class="ql-event-score">0.72</div>
+        <!-- Col 6: Arrow to score -->
+        <div class="ql-arr ql-arr-score"><i class="fas fa-arrow-right"></i></div>
 
-            <div class="ql-event-text"><span class="qual-event-index">Event 02</span>"A bell ringing"</div>
-            <div class="ql-event-audio"><audio controls preload="none" data-waveform="true" src="statics/audios/01.wav"></audio></div>
-            <div class="ql-event-score">0.38</div>
-
-            <div class="ql-event-text"><span class="qual-event-index">Event 03</span>"Blizzard wind blowing"</div>
-            <div class="ql-event-audio"><audio controls preload="none" data-waveform="true" src="statics/audios/00.wav"></audio></div>
-            <div class="ql-event-score">0.52</div>
-          </div>
-
-        </article>
-
-        <div class="qual-flow-arrow" aria-hidden="true"><i class="fas fa-arrow-down"></i></div>
-
-        <article class="card qual-card qual-score-card">
-          <h3>ELSA Score</h3>
+        <!-- Col 7: ELSA Score -->
+        <div class="ql-score-cell">
+          <div class="ql-score-label">ELSA Score</div>
           <div class="qual-score-value">0.54</div>
-        </article>
-      </div>
+        </div>
+
+      </article>
     </section>
 
     <!-- Experimental Results (Carousel) -->
