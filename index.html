@@ -71,8 +71,8 @@
       </div>
 
       <div class="action-buttons fade-in delay-3">
-        <a href="#" class="btn unavailable-btn js-unavailable-link" aria-disabled="true"><i class="fas fa-file-pdf"></i>
-          Paper <i class="fas fa-lock"></i></a>
+        <a href="https://arxiv.org/abs/2606.17404" class="btn"><i class="fas fa-file-pdf"></i>
+          Paper</a>
         <a href="https://github.com/kento2247/ELSA" class="btn"><i class="fab fa-github"></i>
           Code</a>
       </div>
@@ -741,22 +741,6 @@
         console.error('Failed to copy: ', err);
       });
     };
-
-    // --- Unavailable Link Feedback ---
-    document.querySelectorAll('.js-unavailable-link').forEach(link => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-
-        // Restart animation for repeated clicks.
-        link.classList.remove('shake');
-        void link.offsetWidth;
-        link.classList.add('shake');
-      });
-
-      link.addEventListener('animationend', () => {
-        link.classList.remove('shake');
-      });
-    });
 
   </script>
 </body>
