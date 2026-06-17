@@ -131,7 +131,8 @@
         <!-- Col 1: Inputs (rows 2 & 4) -->
         <div class="ql-input-cell ql-text-cell">
           <div class="qual-input-label">Text Query</div>
-          <p class="ql-query-text">"Strong blizzard wind in the background with a bell ringing followed by animal footsteps."</p>
+          <p class="ql-query-text">"Strong blizzard wind in the background with a bell ringing followed by animal
+            footsteps."</p>
         </div>
         <div class="ql-input-cell ql-audio-cell">
           <div class="qual-input-label">Generated Audio</div>
@@ -182,14 +183,26 @@
           </div>
 
           <!-- Compare row -->
-          <div class="ql-ev-compare"><div class="ql-cmp-connector" aria-hidden="true"><span class="ql-cmp-head ql-cmp-head-up"></span><span class="ql-cmp-head ql-cmp-head-down"></span></div></div>
-          <div class="ql-ev-compare"><div class="ql-cmp-connector" aria-hidden="true"><span class="ql-cmp-head ql-cmp-head-up"></span><span class="ql-cmp-head ql-cmp-head-down"></span></div></div>
-          <div class="ql-ev-compare"><div class="ql-cmp-connector" aria-hidden="true"><span class="ql-cmp-head ql-cmp-head-up"></span><span class="ql-cmp-head ql-cmp-head-down"></span></div></div>
+          <div class="ql-ev-compare">
+            <div class="ql-cmp-connector" aria-hidden="true"><span class="ql-cmp-head ql-cmp-head-up"></span><span
+                class="ql-cmp-head ql-cmp-head-down"></span></div>
+          </div>
+          <div class="ql-ev-compare">
+            <div class="ql-cmp-connector" aria-hidden="true"><span class="ql-cmp-head ql-cmp-head-up"></span><span
+                class="ql-cmp-head ql-cmp-head-down"></span></div>
+          </div>
+          <div class="ql-ev-compare">
+            <div class="ql-cmp-connector" aria-hidden="true"><span class="ql-cmp-head ql-cmp-head-up"></span><span
+                class="ql-cmp-head ql-cmp-head-down"></span></div>
+          </div>
 
           <!-- Row 3: Spectrograms (from LASS) -->
-          <div class="ql-ev-audio"><audio controls preload="none" data-waveform="true" src="statics/audios/02.wav"></audio></div>
-          <div class="ql-ev-audio"><audio controls preload="none" data-waveform="true" src="statics/audios/01.wav"></audio></div>
-          <div class="ql-ev-audio"><audio controls preload="none" data-waveform="true" src="statics/audios/00.wav"></audio></div>
+          <div class="ql-ev-audio"><audio controls preload="none" data-waveform="true"
+              src="statics/audios/02.wav"></audio></div>
+          <div class="ql-ev-audio"><audio controls preload="none" data-waveform="true"
+              src="statics/audios/01.wav"></audio></div>
+          <div class="ql-ev-audio"><audio controls preload="none" data-waveform="true"
+              src="statics/audios/00.wav"></audio></div>
 
         </div>
 
@@ -560,7 +573,7 @@
           btn.innerHTML = '<i class="fas fa-play"></i>';
         });
         audio.addEventListener('timeupdate', () => drawSpectrogram(state));
-        audio.addEventListener('seeking',    () => drawSpectrogram(state));
+        audio.addEventListener('seeking', () => drawSpectrogram(state));
         audio.addEventListener('loadedmetadata', () => drawSpectrogram(state));
       }
 
